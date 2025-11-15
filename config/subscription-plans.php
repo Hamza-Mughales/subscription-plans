@@ -40,6 +40,7 @@ return [
         'plan_type' => \NootPro\SubscriptionPlans\Enums\PlanType::class,
         'subscription_model' => \NootPro\SubscriptionPlans\Enums\SubscriptionModel::class,
         'features' => \NootPro\SubscriptionPlans\Enums\Features::class,
+        'modules' => \NootPro\SubscriptionPlans\Enums\Modules::class,
     ],
 
     /*
