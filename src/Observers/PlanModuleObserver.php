@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Observers;
 
+use NootPro\SubscriptionPlans\Events\ModuleCreated;
+use NootPro\SubscriptionPlans\Events\ModuleDeleted;
+use NootPro\SubscriptionPlans\Events\ModuleRestored;
+use NootPro\SubscriptionPlans\Events\ModuleUpdated;
 use NootPro\SubscriptionPlans\Models\PlanModule;
 
 /**
  * PlanModuleObserver
  * 
  * Observer for PlanModule model lifecycle events.
+ * Fires events that projects can listen to for custom logic (cache clearing, etc.).
  */
 class PlanModuleObserver
 {
@@ -18,7 +23,7 @@ class PlanModuleObserver
      */
     public function created(PlanModule $module): void
     {
-        // Add any logic needed when a module is created
+        event(new ModuleCreated($module));
     }
 
     /**
@@ -26,7 +31,7 @@ class PlanModuleObserver
      */
     public function updated(PlanModule $module): void
     {
-        // Add any logic needed when a module is updated
+        event(new ModuleUpdated($module));
     }
 
     /**
@@ -34,7 +39,7 @@ class PlanModuleObserver
      */
     public function deleted(PlanModule $module): void
     {
-        // Add any logic needed when a module is deleted
+        event(new ModuleDeleted($module));
     }
 
     /**
@@ -42,7 +47,7 @@ class PlanModuleObserver
      */
     public function restored(PlanModule $module): void
     {
-        // Add any logic needed when a module is restored
+        event(new ModuleRestored($module));
     }
 }
 
