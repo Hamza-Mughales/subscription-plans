@@ -459,15 +459,45 @@ class PlanSubscription extends Model
     }
 
     /**
-     * Get remaining feature usage.
+     * Get remaining feature usage including additional purchased features.
      * 
-     * Note: This method only considers the base plan feature value.
-     * If you need to include additional purchased features, extend this method
-     * or use getFeatureRemainings() which considers this subscription's usage only.
+     * This method can be extended to include additional feature purchases.
+     * Override getAdditionalFeatureQuantity() to add custom logic.
      */
     public function getFeatureRemaining(string $featureSlug): int
     {
-        return $this->getFeatureRemainings($featureSlug);
+        $baseRemaining = $this->getFeatureRemainings($featureSlug);
+        $additionalQuantity = $this->getAdditionalFeatureQuantity($featureSlug);
+        $companyUsage = $this->getCompanyFeatureUsage($featureSlug);
+        
+        return ($this->getFeatureValue($featureSlug) + $additionalQuantity) - $companyUsage;
+    }
+
+    /**
+     * Get the quantity of additional features purchased for this subscription/subscriber.
+     * 
+     * Override this method in your extended model to add support for additional feature purchases.
+     * 
+     * @param string $featureSlug
+     * @return int
+     */
+    protected function getAdditionalFeatureQuantity(string $featureSlug): int
+    {
+        return 0; // Default: no additional features
+    }
+
+    /**
+     * Get total feature usage across all subscriptions for the subscriber.
+     * 
+     * Override this method to implement company-wide or subscriber-wide usage tracking.
+     * 
+     * @param string $featureSlug
+     * @return int
+     */
+    protected function getCompanyFeatureUsage(string $featureSlug): int
+    {
+        // Default: only consider this subscription's usage
+        return $this->getFeatureUsage($featureSlug);
     }
 
     public function decreaseUsage(string $featureSlug, int $amount = 1): void
@@ -489,14 +519,14 @@ class PlanSubscription extends Model
     }
 
     /**
-     * Get total feature balance (plan value + any additional purchased).
+     * Get total feature balance (plan value + any additional purchased features).
      * 
-     * Note: This is a simplified version. For projects with additional
-     * feature purchases, extend this method in your project.
+     * This method includes the base plan feature value plus any additional
+     * purchased features. Override getAdditionalFeatureQuantity() to add custom logic.
      */
     public function getTotalFeatureBalance(string $featureSlug): int
     {
-        return (int) $this->getFeatureValue($featureSlug);
+        return (int) $this->getFeatureValue($featureSlug) + $this->getAdditionalFeatureQuantity($featureSlug);
     }
 
     /**
