@@ -1,0 +1,25 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src
+        - database
+    level: 6
+
+    checkMissingIterableValueType: true
+    checkGenericClassInNonGenericObjectType: true
+    inferPrivatePropertyTypeFromConstructor: true
+    treatPhpDocTypesAsCertain: false
+
+    excludePaths:
+        - vendor/*
+        - tests/CreatesApplication.php
+
+    universalObjectCratesClasses:
+        - Illuminate\Support\Fluent
+
+    ignoreErrors:
+        - '#Unsafe usage of new static#'
+        - '#Method NootPro\\SubscriptionPlans\\Tests\\.+::setUp\(\) should call parent::setUp\(\)#'
+

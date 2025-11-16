@@ -28,7 +28,10 @@
         "orchestra/testbench": "^9.0|^10.0",
         "phpunit/phpunit": "^11.0",
         "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2"
+        "pestphp/pest-plugin-laravel": "^3.2",
+        "laravel/pint": "^1.15",
+        "phpstan/phpstan": "^1.11",
+        "larastan/larastan": "^2.9"
     },
     "autoload": {
         "psr-4": {
@@ -56,7 +59,10 @@
     "scripts": {
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
-        "test-profile": "vendor/bin/pest --profile"
+        "test-profile": "vendor/bin/pest --profile",
+        "pint": "vendor/bin/pint",
+        "lint": "vendor/bin/pint -v",
+        "phpstan": "vendor/bin/phpstan analyse"
     },
     "config": {
         "allow-plugins": {
