@@ -35,7 +35,7 @@ class TrialEndingNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         $plan = $this->subscription->plan;
-        
+
         return (new MailMessage)
             ->subject(__('subscription-plans::notifications.trial_ending.subject'))
             ->greeting(__('subscription-plans::notifications.trial_ending.greeting'))
@@ -59,11 +59,10 @@ class TrialEndingNotification extends Notification implements ShouldQueue
     {
         return [
             'subscription_id' => $this->subscription->id,
-            'plan_id' => $this->subscription->plan_id,
-            'plan_name' => $this->subscription->plan->name,
-            'trial_ends_at' => $this->subscription->trial_ends_at->toISOString(),
-            'days_remaining' => $this->daysRemaining,
+            'plan_id'         => $this->subscription->plan_id,
+            'plan_name'       => $this->subscription->plan->name,
+            'trial_ends_at'   => $this->subscription->trial_ends_at->toISOString(),
+            'days_remaining'  => $this->daysRemaining,
         ];
     }
 }
-

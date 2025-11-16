@@ -24,20 +24,20 @@ class PlanSubscriptionFactory extends Factory
     public function definition(): array
     {
         $startsAt = $this->faker->dateTimeBetween('-1 month', 'now');
-        $endsAt = (clone $startsAt)->modify('+1 month');
+        $endsAt   = (clone $startsAt)->modify('+1 month');
 
         return [
-            'name' => $this->faker->words(2, true),
-            'slug' => $this->faker->unique()->slug(),
-            'plan_id' => Plan::factory(),
-            'subscriber_type' => 'App\Models\User',
-            'subscriber_id' => 1,
+            'name'              => $this->faker->words(2, true),
+            'slug'              => $this->faker->unique()->slug(),
+            'plan_id'           => Plan::factory(),
+            'subscriber_type'   => 'App\Models\User',
+            'subscriber_id'     => 1,
             'subscription_type' => SubscriptionModel::Fixed,
-            'trial_ends_at' => null,
-            'starts_at' => $startsAt,
-            'ends_at' => $endsAt,
-            'is_active' => true,
-            'is_paid' => true,
+            'trial_ends_at'     => null,
+            'starts_at'         => $startsAt,
+            'ends_at'           => $endsAt,
+            'is_active'         => true,
+            'is_paid'           => true,
         ];
     }
 
@@ -58,13 +58,13 @@ class PlanSubscriptionFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             $trialEndsAt = $this->faker->dateTimeBetween('now', '+14 days');
-            $startsAt = (clone $trialEndsAt)->modify('+1 day');
-            $endsAt = (clone $startsAt)->modify('+1 month');
+            $startsAt    = (clone $trialEndsAt)->modify('+1 day');
+            $endsAt      = (clone $startsAt)->modify('+1 month');
 
             return [
                 'trial_ends_at' => $trialEndsAt,
-                'starts_at' => $startsAt,
-                'ends_at' => $endsAt,
+                'starts_at'     => $startsAt,
+                'ends_at'       => $endsAt,
             ];
         });
     }
@@ -76,7 +76,7 @@ class PlanSubscriptionFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'canceled_at' => now(),
-            'is_active' => false,
+            'is_active'   => false,
         ]);
     }
 
@@ -86,9 +86,8 @@ class PlanSubscriptionFactory extends Factory
     public function ended(): static
     {
         return $this->state(fn (array $attributes) => [
-            'ends_at' => $this->faker->dateTimeBetween('-1 month', '-1 day'),
+            'ends_at'   => $this->faker->dateTimeBetween('-1 month', '-1 day'),
             'is_active' => false,
         ]);
     }
 }
-

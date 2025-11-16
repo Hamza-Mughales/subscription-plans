@@ -3,34 +3,34 @@
 namespace NootPro\SubscriptionPlans\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use NootPro\SubscriptionPlans\Events\ModuleCreated;
+use NootPro\SubscriptionPlans\Events\ModuleDeleted;
+use NootPro\SubscriptionPlans\Events\ModuleRestored;
+use NootPro\SubscriptionPlans\Events\ModuleUpdated;
 use NootPro\SubscriptionPlans\Events\SubscriptionCreated;
 use NootPro\SubscriptionPlans\Events\SubscriptionDeleted;
 use NootPro\SubscriptionPlans\Events\SubscriptionRestored;
 use NootPro\SubscriptionPlans\Events\SubscriptionUpdated;
 use NootPro\SubscriptionPlans\Listeners\ClearSubscriptionCache;
-use NootPro\SubscriptionPlans\Events\ModuleCreated;
-use NootPro\SubscriptionPlans\Events\ModuleUpdated;
-use NootPro\SubscriptionPlans\Events\ModuleDeleted;
-use NootPro\SubscriptionPlans\Events\ModuleRestored;
 use NootPro\SubscriptionPlans\Listeners\RefreshSubscriberModuleCacheOnModuleEvents;
 use NootPro\SubscriptionPlans\Listeners\RefreshSubscriberModuleCacheOnSubscriptionEvents;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        SubscriptionCreated::class => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
-        SubscriptionUpdated::class => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
-        SubscriptionDeleted::class => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
+        SubscriptionCreated::class  => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
+        SubscriptionUpdated::class  => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
+        SubscriptionDeleted::class  => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
         SubscriptionRestored::class => [ClearSubscriptionCache::class, RefreshSubscriberModuleCacheOnSubscriptionEvents::class],
-        ModuleCreated::class => [RefreshSubscriberModuleCacheOnModuleEvents::class],
-        ModuleUpdated::class => [RefreshSubscriberModuleCacheOnModuleEvents::class],
-        ModuleDeleted::class => [RefreshSubscriberModuleCacheOnModuleEvents::class],
-        ModuleRestored::class => [RefreshSubscriberModuleCacheOnModuleEvents::class],
+        ModuleCreated::class        => [RefreshSubscriberModuleCacheOnModuleEvents::class],
+        ModuleUpdated::class        => [RefreshSubscriberModuleCacheOnModuleEvents::class],
+        ModuleDeleted::class        => [RefreshSubscriberModuleCacheOnModuleEvents::class],
+        ModuleRestored::class       => [RefreshSubscriberModuleCacheOnModuleEvents::class],
     ];
 
     public function boot(): void
     {
-        $enabled = (bool) config('subscription-plans.listeners.enabled', true);
+        $enabled    = (bool) config('subscription-plans.listeners.enabled', true);
         $additional = (array) config('subscription-plans.listeners.additional', []);
 
         if (! $enabled) {
@@ -48,5 +48,3 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
     }
 }
-
-

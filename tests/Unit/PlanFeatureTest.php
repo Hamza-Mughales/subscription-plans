@@ -11,25 +11,25 @@ use NootPro\SubscriptionPlans\Models\PlanFeature;
 
 beforeEach(function () {
     $this->plan = Plan::create([
-        'name' => ['en' => 'Test Plan'],
-        'slug' => 'test-plan',
-        'price' => 99.00,
-        'currency' => 'USD',
-        'invoice_period' => 1,
-        'invoice_interval' => Interval::Month,
+        'name'               => ['en' => 'Test Plan'],
+        'slug'               => 'test-plan',
+        'price'              => 99.00,
+        'currency'           => 'USD',
+        'invoice_period'     => 1,
+        'invoice_interval'   => Interval::Month,
         'subscription_model' => SubscriptionModel::Fixed,
-        'type' => PlanType::Plan,
+        'type'               => PlanType::Plan,
     ]);
 });
 
 it('can create a plan feature', function () {
     $feature = $this->plan->features()->create([
-        'slug' => Features::Users->value,
-        'name' => ['en' => 'Users'],
-        'value' => 10,
-        'resettable_period' => 1,
+        'slug'                => Features::Users->value,
+        'name'                => ['en' => 'Users'],
+        'value'               => 10,
+        'resettable_period'   => 1,
         'resettable_interval' => 'month',
-        'sort_order' => 1,
+        'sort_order'          => 1,
     ]);
 
     expect($feature)
@@ -40,8 +40,8 @@ it('can create a plan feature', function () {
 
 it('can get feature by slug', function () {
     $this->plan->features()->create([
-        'slug' => Features::Users->value,
-        'name' => ['en' => 'Users'],
+        'slug'  => Features::Users->value,
+        'name'  => ['en' => 'Users'],
         'value' => 5,
     ]);
 
@@ -61,8 +61,8 @@ it('returns null for non-existent feature', function () {
 
 it('can handle unlimited feature value', function () {
     $feature = $this->plan->features()->create([
-        'slug' => 'unlimited-feature',
-        'name' => ['en' => 'Unlimited Feature'],
+        'slug'  => 'unlimited-feature',
+        'name'  => ['en' => 'Unlimited Feature'],
         'value' => -1, // Unlimited
     ]);
 
@@ -71,11 +71,10 @@ it('can handle unlimited feature value', function () {
 
 it('can handle disabled feature value', function () {
     $feature = $this->plan->features()->create([
-        'slug' => 'disabled-feature',
-        'name' => ['en' => 'Disabled Feature'],
+        'slug'  => 'disabled-feature',
+        'name'  => ['en' => 'Disabled Feature'],
         'value' => 0, // Disabled
     ]);
 
     expect($feature->value)->toBe(0);
 });
-

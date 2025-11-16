@@ -9,7 +9,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 /**
  * Validation rule for feature values.
- * 
+ *
  * Validates that a feature value is either:
  * - -1 (unlimited)
  * - 0 (disabled)
@@ -26,6 +26,7 @@ class ValidFeatureValue implements ValidationRule
     {
         if (! is_numeric($value)) {
             $fail(__('subscription-plans::subscription-plans.validation.feature_value_numeric'));
+
             return;
         }
 
@@ -34,6 +35,7 @@ class ValidFeatureValue implements ValidationRule
         // Allow -1 (unlimited), 0 (disabled), or positive integers
         if ($value < -1) {
             $fail(__('subscription-plans::subscription-plans.validation.feature_value_min'));
+
             return;
         }
 
@@ -43,4 +45,3 @@ class ValidFeatureValue implements ValidationRule
         }
     }
 }
-

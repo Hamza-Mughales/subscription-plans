@@ -37,8 +37,8 @@ class Period
         }
 
         $this->interval = $interval;
-        $this->start = $start ?? Carbon::now();
-        $this->period = $count;
+        $this->start    = $start ?? Carbon::now();
+        $this->period   = $count;
 
         // Calculate end date
         $method = 'add'.ucfirst($this->interval).'s';

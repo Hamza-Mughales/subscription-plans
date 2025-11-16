@@ -15,4 +15,3 @@ class ModuleCreated
         public PlanModule $module
     ) {}
 }
-

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Models;
 
-use NootPro\SubscriptionPlans\Enums\Features;
-use NootPro\SubscriptionPlans\Services\Period;
-use NootPro\SubscriptionPlans\Traits\BelongsToPlan;
-use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InvalidArgumentException;
+use NootPro\SubscriptionPlans\Enums\Features;
+use NootPro\SubscriptionPlans\Services\Period;
+use NootPro\SubscriptionPlans\Traits\BelongsToPlan;
+use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
@@ -69,9 +69,9 @@ class PlanFeature extends Model
 
     /** @var array<string, string> */
     protected $casts = [
-        'value' => 'integer',
+        'value'             => 'integer',
         'resettable_period' => 'integer',
-        'sort_order' => 'integer',
+        'sort_order'        => 'integer',
     ];
 
     protected static function boot(): void

@@ -4,12 +4,6 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Models;
 
-use NootPro\SubscriptionPlans\Enums\Interval;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Events\SubscriptionDeleted;
-use NootPro\SubscriptionPlans\Services\Period;
-use NootPro\SubscriptionPlans\Traits\BelongsToPlan;
-use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,9 +13,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use NootPro\SubscriptionPlans\Database\Factories\PlanSubscriptionFactory;
 use Illuminate\Support\Facades\DB;
 use LogicException;
+use NootPro\SubscriptionPlans\Database\Factories\PlanSubscriptionFactory;
+use NootPro\SubscriptionPlans\Enums\Interval;
+use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
+use NootPro\SubscriptionPlans\Events\SubscriptionDeleted;
+use NootPro\SubscriptionPlans\Services\Period;
+use NootPro\SubscriptionPlans\Traits\BelongsToPlan;
+use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
@@ -97,13 +97,13 @@ class PlanSubscription extends Model
 
     protected $casts = [
         'subscription_type' => SubscriptionModel::class,
-        'trial_ends_at' => 'datetime',
-        'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
-        'cancels_at' => 'datetime',
-        'canceled_at' => 'datetime',
-        'is_active' => 'boolean',
-        'is_paid' => 'boolean',
+        'trial_ends_at'     => 'datetime',
+        'starts_at'         => 'datetime',
+        'ends_at'           => 'datetime',
+        'cancels_at'        => 'datetime',
+        'canceled_at'       => 'datetime',
+        'is_active'         => 'boolean',
+        'is_paid'           => 'boolean',
     ];
 
     /** @var array<int, string> */
@@ -120,7 +120,7 @@ class PlanSubscription extends Model
             if (! $model->starts_at || ! $model->ends_at) {
                 $model->setNewPeriod();
             }
-            
+
             // Ensure only one active subscription per subscriber
             if ($model->is_active && $model->subscriber_id && $model->subscriber_type) {
                 $model->deactivateOtherSubscriptions();
@@ -194,7 +194,7 @@ class PlanSubscription extends Model
     public function cancel(bool $immediately = false): self
     {
         $this->canceled_at = Carbon::now();
-        $this->is_active = false;
+        $this->is_active   = false;
 
         if ($immediately) {
             $this->ends_at = $this->canceled_at;
@@ -248,7 +248,7 @@ class PlanSubscription extends Model
             // Renew period
             $subscription->setNewPeriod();
             $subscription->canceled_at = null;
-            $subscription->is_active = true;
+            $subscription->is_active   = true;
             $subscription->save();
         });
 
@@ -276,7 +276,7 @@ class PlanSubscription extends Model
     public function scopeFindEndingTrial(Builder $builder, int $dayRange = 3): Builder
     {
         $from = Carbon::now();
-        $to = Carbon::now()->addDays($dayRange);
+        $to   = Carbon::now()->addDays($dayRange);
 
         return $builder->whereBetween('trial_ends_at', [$from, $to]);
     }
@@ -301,7 +301,7 @@ class PlanSubscription extends Model
     public function scopeFindEndingPeriod(Builder $builder, int $dayRange = 3): Builder
     {
         $from = Carbon::now();
-        $to = Carbon::now()->addDays($dayRange);
+        $to   = Carbon::now()->addDays($dayRange);
 
         return $builder->whereBetween('ends_at', [$from, $to]);
     }
@@ -359,7 +359,7 @@ class PlanSubscription extends Model
         );
 
         $this->starts_at = $period->getStartDate();
-        $this->ends_at = $period->getEndDate();
+        $this->ends_at   = $period->getEndDate();
 
         return $this;
     }
@@ -370,7 +370,7 @@ class PlanSubscription extends Model
 
         $usage = $this->usage()->firstOrNew([
             'subscription_id' => $this->getKey(),
-            'feature_id' => $feature->getKey(),
+            'feature_id'      => $feature->getKey(),
         ]);
 
         if ($feature->resettable_period) {
@@ -383,7 +383,7 @@ class PlanSubscription extends Model
                 // If the usage record has been expired, let's assign
                 // a new expiration date and reset the uses to zero.
                 $usage->valid_until = $feature->getResetDate($usage->valid_until);
-                $usage->used = 0;
+                $usage->used        = 0;
             }
         }
 
@@ -415,7 +415,7 @@ class PlanSubscription extends Model
     public function canUseFeature(string $featureSlug): bool
     {
         $featureValue = $this->getFeatureValue($featureSlug);
-        $usage = $this->usage()->byFeatureSlug($featureSlug, $this->plan_id)->first();
+        $usage        = $this->usage()->byFeatureSlug($featureSlug, $this->plan_id)->first();
 
         if ($featureValue === -1) {
             return true;
@@ -463,26 +463,23 @@ class PlanSubscription extends Model
 
     /**
      * Get remaining feature usage including additional purchased features.
-     * 
+     *
      * This method can be extended to include additional feature purchases.
      * Override getAdditionalFeatureQuantity() to add custom logic.
      */
     public function getFeatureRemaining(string $featureSlug): int
     {
-        $baseRemaining = $this->getFeatureRemainings($featureSlug);
+        $baseRemaining      = $this->getFeatureRemainings($featureSlug);
         $additionalQuantity = $this->getAdditionalFeatureQuantity($featureSlug);
-        $companyUsage = $this->getCompanyFeatureUsage($featureSlug);
-        
+        $companyUsage       = $this->getCompanyFeatureUsage($featureSlug);
+
         return ($this->getFeatureValue($featureSlug) + $additionalQuantity) - $companyUsage;
     }
 
     /**
      * Get the quantity of additional features purchased for this subscription/subscriber.
-     * 
+     *
      * Override this method in your extended model to add support for additional feature purchases.
-     * 
-     * @param string $featureSlug
-     * @return int
      */
     protected function getAdditionalFeatureQuantity(string $featureSlug): int
     {
@@ -491,11 +488,8 @@ class PlanSubscription extends Model
 
     /**
      * Get total feature usage across all subscriptions for the subscriber.
-     * 
+     *
      * Override this method to implement company-wide or subscriber-wide usage tracking.
-     * 
-     * @param string $featureSlug
-     * @return int
      */
     protected function getCompanyFeatureUsage(string $featureSlug): int
     {
@@ -523,7 +517,7 @@ class PlanSubscription extends Model
 
     /**
      * Get total feature balance (plan value + any additional purchased features).
-     * 
+     *
      * This method includes the base plan feature value plus any additional
      * purchased features. Override getAdditionalFeatureQuantity() to add custom logic.
      */
@@ -535,8 +529,6 @@ class PlanSubscription extends Model
     /**
      * Deactivate all other active subscriptions for the same subscriber.
      * This ensures only one subscription can be active at a time.
-     *
-     * @return void
      */
     protected function deactivateOtherSubscriptions(): void
     {

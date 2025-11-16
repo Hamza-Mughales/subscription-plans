@@ -20,11 +20,11 @@ return [
     |
     */
     'models' => [
-        'plan' => \NootPro\SubscriptionPlans\Models\Plan::class,
-        'plan_subscription' => \NootPro\SubscriptionPlans\Models\PlanSubscription::class,
-        'plan_feature' => \NootPro\SubscriptionPlans\Models\PlanFeature::class,
+        'plan'                    => \NootPro\SubscriptionPlans\Models\Plan::class,
+        'plan_subscription'       => \NootPro\SubscriptionPlans\Models\PlanSubscription::class,
+        'plan_feature'            => \NootPro\SubscriptionPlans\Models\PlanFeature::class,
         'plan_subscription_usage' => \NootPro\SubscriptionPlans\Models\PlanSubscriptionUsage::class,
-        'plan_module' => \NootPro\SubscriptionPlans\Models\PlanModule::class,
+        'plan_module'             => \NootPro\SubscriptionPlans\Models\PlanModule::class,
     ],
 
     /*
@@ -36,11 +36,11 @@ return [
     |
     */
     'enums' => [
-        'interval' => \NootPro\SubscriptionPlans\Enums\Interval::class,
-        'plan_type' => \NootPro\SubscriptionPlans\Enums\PlanType::class,
+        'interval'           => \NootPro\SubscriptionPlans\Enums\Interval::class,
+        'plan_type'          => \NootPro\SubscriptionPlans\Enums\PlanType::class,
         'subscription_model' => \NootPro\SubscriptionPlans\Enums\SubscriptionModel::class,
-        'features' => \NootPro\SubscriptionPlans\Enums\Features::class,
-        'modules' => \NootPro\SubscriptionPlans\Enums\Modules::class,
+        'features'           => \NootPro\SubscriptionPlans\Enums\Features::class,
+        'modules'            => \NootPro\SubscriptionPlans\Enums\Modules::class,
     ],
 
     /*
@@ -52,11 +52,11 @@ return [
     |
     */
     'table_names' => [
-        'plans' => 'plans',
-        'plan_features' => 'plan_features',
-        'plan_subscriptions' => 'plan_subscriptions',
+        'plans'                   => 'plans',
+        'plan_features'           => 'plan_features',
+        'plan_subscriptions'      => 'plan_subscriptions',
         'plan_subscription_usage' => 'plan_subscription_usage',
-        'plan_modules' => 'plan_modules',
+        'plan_modules'            => 'plan_modules',
     ],
 
     /*
@@ -68,7 +68,7 @@ return [
     |
     */
     'features' => [
-        'allow_unlimited' => true, // Allow -1 for unlimited
+        'allow_unlimited'  => true, // Allow -1 for unlimited
         'auto_reset_usage' => true, // Auto-reset usage when period expires
     ],
 
@@ -82,7 +82,7 @@ return [
     */
     'cache' => [
         'enabled' => env('SUBSCRIPTION_CACHE_ENABLED', true),
-        'ttl' => env('SUBSCRIPTION_CACHE_TTL', 30), // Cache TTL in minutes
+        'ttl'     => env('SUBSCRIPTION_CACHE_TTL', 30), // Cache TTL in minutes
     ],
 
     /*
@@ -111,7 +111,7 @@ return [
     |
     */
     'listeners' => [
-        'enabled' => env('SUBSCRIPTION_LISTENERS_ENABLED', true),
+        'enabled'    => env('SUBSCRIPTION_LISTENERS_ENABLED', true),
         'additional' => [
             // \NootPro\SubscriptionPlans\Events\SubscriptionCreated::class => [
             //     \App\Listeners\YourCustomListener::class,
@@ -154,8 +154,7 @@ return [
     |
     */
     'notifications' => [
-        'enabled' => env('SUBSCRIPTION_NOTIFICATIONS_ENABLED', true),
+        'enabled'  => env('SUBSCRIPTION_NOTIFICATIONS_ENABLED', true),
         'channels' => ['mail', 'database'], // Available: mail, database, slack, etc.
     ],
 ];
-

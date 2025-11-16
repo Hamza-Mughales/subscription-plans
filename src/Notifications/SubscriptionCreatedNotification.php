@@ -34,14 +34,14 @@ class SubscriptionCreatedNotification extends Notification implements ShouldQueu
     public function toMail(object $notifiable): MailMessage
     {
         $plan = $this->subscription->plan;
-        
+
         return (new MailMessage)
             ->subject(__('subscription-plans::notifications.subscription_created.subject'))
             ->greeting(__('subscription-plans::notifications.subscription_created.greeting'))
             ->line(__('subscription-plans::notifications.subscription_created.line1', ['plan' => $plan->name]))
             ->line(__('subscription-plans::notifications.subscription_created.line2', [
                 'start_date' => $this->subscription->starts_at->format('F d, Y'),
-                'end_date' => $this->subscription->ends_at->format('F d, Y'),
+                'end_date'   => $this->subscription->ends_at->format('F d, Y'),
             ]))
             ->when($this->subscription->onTrial(), function ($mail) {
                 return $mail->line(__('subscription-plans::notifications.subscription_created.trial', [
@@ -61,11 +61,10 @@ class SubscriptionCreatedNotification extends Notification implements ShouldQueu
     {
         return [
             'subscription_id' => $this->subscription->id,
-            'plan_id' => $this->subscription->plan_id,
-            'plan_name' => $this->subscription->plan->name,
-            'starts_at' => $this->subscription->starts_at->toISOString(),
-            'ends_at' => $this->subscription->ends_at->toISOString(),
+            'plan_id'         => $this->subscription->plan_id,
+            'plan_name'       => $this->subscription->plan->name,
+            'starts_at'       => $this->subscription->starts_at->toISOString(),
+            'ends_at'         => $this->subscription->ends_at->toISOString(),
         ];
     }
 }
-

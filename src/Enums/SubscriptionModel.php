@@ -8,7 +8,7 @@ use Filament\Support\Contracts\HasLabel;
 
 enum SubscriptionModel: string implements HasLabel
 {
-    case Payg = 'payg';
+    case Payg  = 'payg';
     case Fixed = 'fixed';
 
     /**

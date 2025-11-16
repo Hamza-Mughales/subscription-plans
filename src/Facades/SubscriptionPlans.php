@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool moduleEnabled(object $subscriber, string $module)
  * @method static void clearModuleCache(object $subscriber)
  * @method static void refreshModuleCache(object $subscriber)
- * 
+ *
  * @see \NootPro\SubscriptionPlans\Services\SubscriptionPlansService
  */
 class SubscriptionPlans extends Facade
@@ -31,4 +31,3 @@ class SubscriptionPlans extends Facade
         return 'subscription-plans';
     }
 }
-

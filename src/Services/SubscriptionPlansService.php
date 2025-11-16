@@ -72,6 +72,7 @@ class SubscriptionPlansService
         $cacheKey = $this->getCacheKey($subscriber, 'active_subscription');
 
         $cacheTtl = config('subscription-plans.cache.ttl', config('subscription-plans.cache_ttl', 30));
+
         return Cache::remember(
             $cacheKey,
             now()->addMinutes($cacheTtl),
@@ -91,11 +92,11 @@ class SubscriptionPlansService
     public function clearSubscriptionCache(object $subscriber): void
     {
         $type = get_class($subscriber);
-        $id = $subscriber->getKey();
+        $id   = $subscriber->getKey();
 
         // Clear status cache
         Cache::forget("subscription_status_{$type}_{$id}");
-        
+
         // Clear active subscription cache
         Cache::forget("subscription_active_{$type}_{$id}");
     }
@@ -105,8 +106,8 @@ class SubscriptionPlansService
      */
     public function moduleEnabled(object $subscriber, string $module): bool
     {
-        $type = get_class($subscriber);
-        $id = $subscriber->getKey();
+        $type     = get_class($subscriber);
+        $id       = $subscriber->getKey();
         $cacheKey = "module_enabled_{$type}_{$id}_{$module}";
         $cacheTtl = config('subscription-plans.cache.ttl', config('subscription-plans.cache_ttl', 30));
 
@@ -118,6 +119,7 @@ class SubscriptionPlansService
                 if (! $activeSubscription || ! $activeSubscription->plan) {
                     return false;
                 }
+
                 return $activeSubscription->plan
                     ->modules()
                     ->where('module', $module)
@@ -136,7 +138,7 @@ class SubscriptionPlansService
             return;
         }
         $type = get_class($subscriber);
-        $id = $subscriber->getKey();
+        $id   = $subscriber->getKey();
         foreach ($modulesEnum::cases() as $module) {
             Cache::forget("module_enabled_{$type}_{$id}_{$module->value}");
         }
@@ -172,9 +174,8 @@ class SubscriptionPlansService
     protected function getCacheKey(object $subscriber, string $suffix): string
     {
         $type = get_class($subscriber);
-        $id = $subscriber->getKey();
+        $id   = $subscriber->getKey();
 
         return "subscription_{$suffix}_{$type}_{$id}";
     }
 }
-

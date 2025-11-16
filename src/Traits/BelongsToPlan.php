@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Traits;
 
-use NootPro\SubscriptionPlans\Models\Plan;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use NootPro\SubscriptionPlans\Models\Plan;
 
 trait BelongsToPlan
 {

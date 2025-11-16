@@ -36,7 +36,7 @@ enum Modules: string implements HasLabel
      * These are placeholder values and should be replaced with your actual modules.
      */
     case WebsiteContent = 'website_content';
-    case Catalog = 'catalog';
+    case Catalog        = 'catalog';
 
     /**
      * Get the display label for the module.

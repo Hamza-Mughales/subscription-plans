@@ -34,7 +34,7 @@ class SubscriptionExpiredNotification extends Notification implements ShouldQueu
     public function toMail(object $notifiable): MailMessage
     {
         $plan = $this->subscription->plan;
-        
+
         return (new MailMessage)
             ->subject(__('subscription-plans::notifications.subscription_expired.subject'))
             ->greeting(__('subscription-plans::notifications.subscription_expired.greeting'))
@@ -53,10 +53,9 @@ class SubscriptionExpiredNotification extends Notification implements ShouldQueu
     {
         return [
             'subscription_id' => $this->subscription->id,
-            'plan_id' => $this->subscription->plan_id,
-            'plan_name' => $this->subscription->plan->name,
-            'ended_at' => $this->subscription->ends_at->toISOString(),
+            'plan_id'         => $this->subscription->plan_id,
+            'plan_name'       => $this->subscription->plan->name,
+            'ended_at'        => $this->subscription->ends_at->toISOString(),
         ];
     }
 }
-

@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Models;
 
-use NootPro\SubscriptionPlans\Enums\Interval;
-use NootPro\SubscriptionPlans\Enums\PlanType;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +12,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use NootPro\SubscriptionPlans\Database\Factories\PlanFactory;
+use NootPro\SubscriptionPlans\Enums\Interval;
+use NootPro\SubscriptionPlans\Enums\PlanType;
+use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
+use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
@@ -95,19 +95,19 @@ class Plan extends Model
 
     /** @var array<string, string> */
     protected $casts = [
-        'type' => PlanType::class,
+        'type'               => PlanType::class,
         'subscription_model' => SubscriptionModel::class,
-        'invoice_interval' => Interval::class,
-        'trial_interval' => Interval::class,
-        'grace_interval' => Interval::class,
-        'is_active' => 'boolean',
-        'is_visible' => 'boolean',
-        'price' => 'decimal:2',
-        'signup_fee' => 'decimal:2',
-        'trial_period' => 'integer',
-        'invoice_period' => 'integer',
-        'grace_period' => 'integer',
-        'sort_order' => 'integer',
+        'invoice_interval'   => Interval::class,
+        'trial_interval'     => Interval::class,
+        'grace_interval'     => Interval::class,
+        'is_active'          => 'boolean',
+        'is_visible'         => 'boolean',
+        'price'              => 'decimal:2',
+        'signup_fee'         => 'decimal:2',
+        'trial_period'       => 'integer',
+        'invoice_period'     => 'integer',
+        'grace_period'       => 'integer',
+        'sort_order'         => 'integer',
     ];
 
     protected static function boot(): void

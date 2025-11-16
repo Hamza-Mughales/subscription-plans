@@ -43,6 +43,7 @@ class DeactivateExpiredSubscriptions extends Command
 
         if ($expiredSubscriptions->isEmpty()) {
             $this->info('No expired subscriptions found.');
+
             return Command::SUCCESS;
         }
 
@@ -52,10 +53,10 @@ class DeactivateExpiredSubscriptions extends Command
             $subscriber = $subscription->subscriber;
 
             return [
-                'ID' => $subscription->id,
+                'ID'         => $subscription->id,
                 'Subscriber' => $subscriber ? get_class($subscriber).' #'.$subscriber->getKey() : 'N/A',
-                'Plan' => $subscription->plan->name ?? 'N/A',
-                'Ended At' => $subscription->ends_at?->format('Y-m-d H:i:s') ?? 'N/A',
+                'Plan'       => $subscription->plan->name                      ?? 'N/A',
+                'Ended At'   => $subscription->ends_at?->format('Y-m-d H:i:s') ?? 'N/A',
             ];
         })->toArray();
 
@@ -66,11 +67,13 @@ class DeactivateExpiredSubscriptions extends Command
 
         if ($dryRun) {
             $this->warn('Dry run mode - no changes made.');
+
             return Command::SUCCESS;
         }
 
         if (! $this->confirm('Do you want to deactivate these subscriptions?', true)) {
             $this->info('Operation cancelled.');
+
             return Command::SUCCESS;
         }
 
@@ -88,4 +91,3 @@ class DeactivateExpiredSubscriptions extends Command
         return Command::SUCCESS;
     }
 }
-

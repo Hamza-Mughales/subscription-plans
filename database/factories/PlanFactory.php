@@ -25,23 +25,23 @@ class PlanFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => ['en' => $this->faker->words(2, true)],
-            'slug' => $this->faker->unique()->slug(),
-            'description' => ['en' => $this->faker->sentence()],
-            'type' => PlanType::Plan,
-            'is_active' => true,
-            'is_visible' => true,
-            'price' => $this->faker->randomFloat(2, 10, 500),
-            'signup_fee' => 0,
+            'name'               => ['en' => $this->faker->words(2, true)],
+            'slug'               => $this->faker->unique()->slug(),
+            'description'        => ['en' => $this->faker->sentence()],
+            'type'               => PlanType::Plan,
+            'is_active'          => true,
+            'is_visible'         => true,
+            'price'              => $this->faker->randomFloat(2, 10, 500),
+            'signup_fee'         => 0,
             'subscription_model' => SubscriptionModel::Fixed,
-            'currency' => 'USD',
-            'trial_period' => 14,
-            'trial_interval' => Interval::Day,
-            'invoice_period' => 1,
-            'invoice_interval' => Interval::Month,
-            'grace_period' => 15,
-            'grace_interval' => Interval::Day,
-            'sort_order' => $this->faker->numberBetween(1, 100),
+            'currency'           => 'USD',
+            'trial_period'       => 14,
+            'trial_interval'     => Interval::Day,
+            'invoice_period'     => 1,
+            'invoice_interval'   => Interval::Month,
+            'grace_period'       => 15,
+            'grace_interval'     => Interval::Day,
+            'sort_order'         => $this->faker->numberBetween(1, 100),
         ];
     }
 
@@ -75,4 +75,3 @@ class PlanFactory extends Factory
         ]);
     }
 }
-

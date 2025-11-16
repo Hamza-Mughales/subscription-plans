@@ -35,7 +35,7 @@ class SubscriptionExpiringNotification extends Notification implements ShouldQue
     public function toMail(object $notifiable): MailMessage
     {
         $plan = $this->subscription->plan;
-        
+
         return (new MailMessage)
             ->subject(__('subscription-plans::notifications.subscription_expiring.subject'))
             ->greeting(__('subscription-plans::notifications.subscription_expiring.greeting'))
@@ -59,11 +59,10 @@ class SubscriptionExpiringNotification extends Notification implements ShouldQue
     {
         return [
             'subscription_id' => $this->subscription->id,
-            'plan_id' => $this->subscription->plan_id,
-            'plan_name' => $this->subscription->plan->name,
-            'ends_at' => $this->subscription->ends_at->toISOString(),
-            'days_remaining' => $this->daysRemaining,
+            'plan_id'         => $this->subscription->plan_id,
+            'plan_name'       => $this->subscription->plan->name,
+            'ends_at'         => $this->subscription->ends_at->toISOString(),
+            'days_remaining'  => $this->daysRemaining,
         ];
     }
 }
-

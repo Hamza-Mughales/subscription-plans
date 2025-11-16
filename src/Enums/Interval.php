@@ -8,10 +8,10 @@ use Filament\Support\Contracts\HasLabel;
 
 enum Interval: string implements HasLabel
 {
-    case Day = 'day';
-    case Week = 'week';
+    case Day   = 'day';
+    case Week  = 'week';
     case Month = 'month';
-    case Year = 'year';
+    case Year  = 'year';
 
     /**
      * Get the display label for the interval.

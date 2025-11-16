@@ -10,7 +10,7 @@ class RefreshSubscriberModuleCacheOnSubscriptionEvents
     public function handle($event): void
     {
         $subscription = $event->subscription ?? null;
-        $subscriber = $subscription?->subscriber;
+        $subscriber   = $subscription?->subscriber;
 
         if (! $subscription || ! $subscriber) {
             return;
@@ -20,12 +20,14 @@ class RefreshSubscriberModuleCacheOnSubscriptionEvents
         $eventClass = class_basename($event);
 
         if ($eventClass === 'SubscriptionCreated' || $eventClass === 'SubscriptionRestored') {
-                \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::refreshModuleCache($subscriber);
+            \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::refreshModuleCache($subscriber);
+
             return;
         }
 
         if ($eventClass === 'SubscriptionUpdated') {
-                \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::refreshModuleCache($subscriber);
+            \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::refreshModuleCache($subscriber);
+
             return;
         }
 
@@ -39,9 +41,8 @@ class RefreshSubscriberModuleCacheOnSubscriptionEvents
                     Cache::forget("company_{$subscriber->id}_module_{$module->value}");
                 }
             }
+
             return;
         }
     }
 }
-
-

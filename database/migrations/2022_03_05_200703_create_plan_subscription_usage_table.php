@@ -27,7 +27,7 @@ return new class extends Migration
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('feature_id')->references('id')->on('plan_features')
                 ->onDelete('cascade')->onUpdate('cascade');
-            
+
             // Performance Indexes
             $table->index('valid_until');
         });

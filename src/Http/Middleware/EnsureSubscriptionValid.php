@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Middleware to ensure the subscriber has an active subscription.
- * 
+ *
  * This middleware checks if the authenticated user (or tenant) has an active subscription.
  * If not, it redirects to a configurable route or returns a 403 response.
- * 
+ *
  * Usage:
  * - In routes: Route::middleware(['auth', 'subscription'])->group(...)
  * - In Kernel: 'subscription' => \NootPro\SubscriptionPlans\Http\Middleware\EnsureSubscriptionValid::class
@@ -36,8 +36,8 @@ class EnsureSubscriptionValid
         }
 
         // Check if subscriber has active subscription (cached for performance)
-        $cacheKey = $this->getCacheKey($subscriber);
-        $cacheTtl = config('subscription-plans.cache.ttl', config('subscription-plans.cache_ttl', 30));
+        $cacheKey              = $this->getCacheKey($subscriber);
+        $cacheTtl              = config('subscription-plans.cache.ttl', config('subscription-plans.cache_ttl', 30));
         $hasActiveSubscription = Cache::remember(
             $cacheKey,
             now()->addMinutes($cacheTtl),
@@ -53,13 +53,11 @@ class EnsureSubscriptionValid
 
     /**
      * Get the subscriber from the request.
-     * 
+     *
      * This method attempts to get the subscriber from:
      * 1. Filament tenant (if using Filament)
      * 2. Authenticated user (if using standard auth)
      * 3. Custom resolver from config
-     * 
-     * @return object|null
      */
     protected function getSubscriber(Request $request): ?object
     {
@@ -117,7 +115,7 @@ class EnsureSubscriptionValid
     protected function getCacheKey(object $subscriber): string
     {
         $type = get_class($subscriber);
-        $id = $subscriber->getKey();
+        $id   = $subscriber->getKey();
 
         return "subscription_status_{$type}_{$id}";
     }
@@ -148,4 +146,3 @@ class EnsureSubscriptionValid
         return redirect()->route($redirectTo);
     }
 }
-

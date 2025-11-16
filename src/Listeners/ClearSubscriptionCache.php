@@ -9,12 +9,10 @@ class ClearSubscriptionCache
     public function handle($event): void
     {
         $subscription = $event->subscription ?? null;
-        $subscriber = $subscription?->subscriber;
+        $subscriber   = $subscription?->subscriber;
 
         if ($subscriber) {
             SubscriptionPlans::clearSubscriptionCache($subscriber);
         }
     }
 }
-
-

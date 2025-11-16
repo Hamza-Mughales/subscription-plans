@@ -33,38 +33,39 @@ class CheckExpiringSubscriptions extends Command
      */
     public function handle(): int
     {
-        $days = (int) $this->option('days');
+        $days       = (int) $this->option('days');
         $checkTrial = $this->option('trial');
 
         if ($checkTrial) {
             $subscriptions = PlanSubscription::findEndingTrial($days)
                 ->with(['plan', 'subscriber'])
                 ->get();
-            
+
             $this->info("Found {$subscriptions->count()} trials ending in the next {$days} days:");
         } else {
             $subscriptions = PlanSubscription::findEndingPeriod($days)
                 ->with(['plan', 'subscriber'])
                 ->get();
-            
+
             $this->info("Found {$subscriptions->count()} subscriptions ending in the next {$days} days:");
         }
 
         if ($subscriptions->isEmpty()) {
             $this->info('No expiring subscriptions found.');
+
             return Command::SUCCESS;
         }
 
         $tableData = $subscriptions->map(function ($subscription) use ($checkTrial) {
             $subscriber = $subscription->subscriber;
-            $expiresAt = $checkTrial ? $subscription->trial_ends_at : $subscription->ends_at;
+            $expiresAt  = $checkTrial ? $subscription->trial_ends_at : $subscription->ends_at;
 
             return [
-                'ID' => $subscription->id,
+                'ID'         => $subscription->id,
                 'Subscriber' => $subscriber ? get_class($subscriber).' #'.$subscriber->getKey() : 'N/A',
-                'Plan' => $subscription->plan->name ?? 'N/A',
+                'Plan'       => $subscription->plan->name          ?? 'N/A',
                 'Expires At' => $expiresAt?->format('Y-m-d H:i:s') ?? 'N/A',
-                'Status' => $subscription->active() ? 'Active' : 'Inactive',
+                'Status'     => $subscription->active() ? 'Active' : 'Inactive',
             ];
         })->toArray();
 
@@ -76,4 +77,3 @@ class CheckExpiringSubscriptions extends Command
         return Command::SUCCESS;
     }
 }
-

@@ -8,7 +8,7 @@ use Filament\Support\Contracts\HasLabel;
 
 enum PlanType: string implements HasLabel
 {
-    case Plan = 'plan';
+    case Plan     = 'plan';
     case TestPlan = 'test_plan';
 
     /**

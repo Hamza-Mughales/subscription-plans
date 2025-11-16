@@ -57,7 +57,7 @@ class PlanSubscriptionUsage extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'used' => 'integer',
+        'used'        => 'integer',
         'valid_until' => 'datetime',
     ];
 

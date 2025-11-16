@@ -9,7 +9,6 @@ use NootPro\SubscriptionPlans\Console\Commands\ResetFeatureUsage;
 use NootPro\SubscriptionPlans\Models\PlanSubscription;
 use NootPro\SubscriptionPlans\Observers\PlanSubscriptionObserver;
 use NootPro\SubscriptionPlans\Services\SubscriptionPlansService;
-use NootPro\SubscriptionPlans\Enums\Modules as ModulesEnum;
 
 class SubscriptionPlansServiceProvider extends ServiceProvider
 {
@@ -26,7 +25,7 @@ class SubscriptionPlansServiceProvider extends ServiceProvider
 
         // Register service as singleton
         $this->app->singleton('subscription-plans', function ($app) {
-            return new SubscriptionPlansService();
+            return new SubscriptionPlansService;
         });
     }
 

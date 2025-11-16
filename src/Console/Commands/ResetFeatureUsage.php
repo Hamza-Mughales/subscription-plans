@@ -42,6 +42,7 @@ class ResetFeatureUsage extends Command
 
         if ($expiredUsages->isEmpty()) {
             $this->info('No expired usage records found.');
+
             return Command::SUCCESS;
         }
 
@@ -49,11 +50,11 @@ class ResetFeatureUsage extends Command
 
         $tableData = $expiredUsages->map(function ($usage) {
             return [
-                'ID' => $usage->id,
+                'ID'           => $usage->id,
                 'Subscription' => $usage->subscription_id,
-                'Feature' => $usage->feature->name ?? 'N/A',
-                'Used' => $usage->used,
-                'Expires At' => $usage->expires_at?->format('Y-m-d H:i:s') ?? 'N/A',
+                'Feature'      => $usage->feature->name ?? 'N/A',
+                'Used'         => $usage->used,
+                'Expires At'   => $usage->expires_at?->format('Y-m-d H:i:s') ?? 'N/A',
             ];
         })->toArray();
 
@@ -64,17 +65,19 @@ class ResetFeatureUsage extends Command
 
         if ($dryRun) {
             $this->warn('Dry run mode - no changes made.');
+
             return Command::SUCCESS;
         }
 
         if (! $this->confirm('Do you want to reset these usage records?', true)) {
             $this->info('Operation cancelled.');
+
             return Command::SUCCESS;
         }
 
         $reset = 0;
         foreach ($expiredUsages as $usage) {
-            $usage->used = 0;
+            $usage->used       = 0;
             $usage->expires_at = null;
             $usage->save();
             $reset++;
@@ -85,4 +88,3 @@ class ResetFeatureUsage extends Command
         return Command::SUCCESS;
     }
 }
-

@@ -10,7 +10,7 @@ use NootPro\SubscriptionPlans\Models\PlanSubscription;
 
 /**
  * PlanSubscriptionObserver
- * 
+ *
  * This observer fires events for subscription lifecycle.
  * Projects can listen to these events to handle their own logic
  * (cache clearing, notifications, etc.).

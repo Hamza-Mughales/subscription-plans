@@ -47,4 +47,3 @@ class TestCase extends Orchestra
         $migration->up();
     }
 }
-

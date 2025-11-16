@@ -3,7 +3,7 @@
 return [
     'modules' => [
         'website_content' => 'إدارة الموقع',
-        'catalog' => 'كتالوج',
+        'catalog'         => 'كتالوج',
     ],
 
     'features' => [
@@ -11,20 +11,19 @@ return [
     ],
 
     'interval' => [
-        'day' => 'يوم',
-        'week' => 'أسبوع',
+        'day'   => 'يوم',
+        'week'  => 'أسبوع',
         'month' => 'شهر',
-        'year' => 'سنة',
+        'year'  => 'سنة',
     ],
 
     'plan-type' => [
-        'plan' => 'خطة',
+        'plan'      => 'خطة',
         'test_plan' => 'خطة تجريبية',
     ],
 
     'subscription-model' => [
-        'payg' => 'ادفع عند الاستخدام',
+        'payg'  => 'ادفع عند الاستخدام',
         'fixed' => 'ثابت',
     ],
 ];
-

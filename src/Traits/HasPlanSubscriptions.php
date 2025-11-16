@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Traits;
 
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
-use NootPro\SubscriptionPlans\Services\Period;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use NootPro\SubscriptionPlans\Models\Plan;
+use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use NootPro\SubscriptionPlans\Services\Period;
 
 trait HasPlanSubscriptions
 {
@@ -99,18 +99,18 @@ trait HasPlanSubscriptions
                 $activeSubscription->cancel(immediately: true);
             });
 
-        $trial = new Period($plan->trial_interval->value, $plan->trial_period, $startDate ?? now());
+        $trial  = new Period($plan->trial_interval->value, $plan->trial_period, $startDate ?? now());
         $period = new Period($plan->invoice_interval->value, $plan->invoice_period, $trial->getEndDate());
 
         /** @var PlanSubscription $subscriptionModel */
         $subscriptionModel = $this->planSubscriptions()->create([
-            'name' => $subscription,
-            'plan_id' => $plan->getKey(),
+            'name'              => $subscription,
+            'plan_id'           => $plan->getKey(),
             'subscription_type' => $plan->subscription_model->value,
-            'trial_ends_at' => $trial->getEndDate(),
-            'starts_at' => $period->getStartDate(),
-            'ends_at' => $period->getEndDate(),
-            'is_active' => true,
+            'trial_ends_at'     => $trial->getEndDate(),
+            'starts_at'         => $period->getStartDate(),
+            'ends_at'           => $period->getEndDate(),
+            'is_active'         => true,
         ]);
 
         return $subscriptionModel;
@@ -118,8 +118,6 @@ trait HasPlanSubscriptions
 
     /**
      * Get the active subscription for this subscriber.
-     * 
-     * @return PlanSubscription|null
      */
     public function activePlanSubscription(): ?PlanSubscription
     {

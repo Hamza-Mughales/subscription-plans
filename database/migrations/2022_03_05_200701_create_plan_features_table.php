@@ -31,7 +31,7 @@ return new class extends Migration
             // Foreign Keys
             $table->foreign('plan_id')->references('id')->on('plans')
                 ->onDelete('cascade')->onUpdate('cascade');
-            
+
             // Performance Indexes
             $table->index(['plan_id', 'slug'], 'plan_slug_index');
         });

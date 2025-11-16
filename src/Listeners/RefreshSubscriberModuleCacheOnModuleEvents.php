@@ -7,7 +7,7 @@ class RefreshSubscriberModuleCacheOnModuleEvents
     public function handle($event): void
     {
         $module = $event->module ?? null;
-        $plan = $module?->plan;
+        $plan   = $module?->plan;
 
         if (! $plan) {
             return;
@@ -28,5 +28,3 @@ class RefreshSubscriberModuleCacheOnModuleEvents
             });
     }
 }
-
-

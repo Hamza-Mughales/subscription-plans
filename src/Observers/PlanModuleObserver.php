@@ -12,7 +12,7 @@ use NootPro\SubscriptionPlans\Models\PlanModule;
 
 /**
  * PlanModuleObserver
- * 
+ *
  * Observer for PlanModule model lifecycle events.
  * Fires events that projects can listen to for custom logic (cache clearing, etc.).
  */
@@ -50,4 +50,3 @@ class PlanModuleObserver
         event(new ModuleRestored($module));
     }
 }
-
