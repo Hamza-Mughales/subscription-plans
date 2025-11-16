@@ -69,8 +69,10 @@ use Spatie\Translatable\HasTranslations;
 class PlanSubscription extends Model
 {
     use BelongsToPlan;
+
     /** @use HasFactory<PlanSubscriptionFactory> */
     use HasFactory;
+
     use HasSlug;
     use HasTranslations;
     use SoftDeletes;
@@ -78,7 +80,7 @@ class PlanSubscription extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'subscriber_id',
@@ -562,8 +564,6 @@ class PlanSubscription extends Model
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return PlanSubscriptionFactory
      */
     protected static function newFactory(): PlanSubscriptionFactory
     {

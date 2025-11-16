@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static \NootPro\SubscriptionPlans\Models\Plan|null findPlan(string|int $identifier)
- * @method static \Illuminate\Database\Eloquent\Collection getActivePlans()
- * @method static \Illuminate\Database\Eloquent\Collection getVisiblePlans()
+ * @method static \Illuminate\Database\Eloquent\Collection<int, \NootPro\SubscriptionPlans\Models\Plan> getActivePlans()
+ * @method static \Illuminate\Database\Eloquent\Collection<int, \NootPro\SubscriptionPlans\Models\Plan> getVisiblePlans()
  * @method static bool hasActiveSubscription(object $subscriber)
  * @method static \NootPro\SubscriptionPlans\Models\PlanSubscription|null getActiveSubscription(object $subscriber)
  * @method static void clearSubscriptionCache(object $subscriber)

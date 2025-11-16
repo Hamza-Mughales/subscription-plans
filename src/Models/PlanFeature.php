@@ -52,7 +52,7 @@ class PlanFeature extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'plan_id',
@@ -105,7 +105,7 @@ class PlanFeature extends Model
     /**
      * Ensure slug is always stored as a string
      *
-     * @param mixed $value
+     * @param  mixed  $value
      */
     public function setSlugAttribute($value): void
     {

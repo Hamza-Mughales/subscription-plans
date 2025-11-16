@@ -8,8 +8,6 @@ class ClearSubscriptionCache
 {
     /**
      * Handle the event.
-     *
-     * @param object $event
      */
     public function handle(object $event): void
     {

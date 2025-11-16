@@ -30,8 +30,8 @@
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-laravel": "^3.2",
         "laravel/pint": "^1.15",
-        "phpstan/phpstan": "^1.11",
-        "larastan/larastan": "^2.9"
+        "phpstan/phpstan": "^2.0",
+        "larastan/larastan": "^3.0"
     },
     "autoload": {
         "psr-4": {

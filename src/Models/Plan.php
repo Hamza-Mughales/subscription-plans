@@ -58,6 +58,7 @@ class Plan extends Model
 {
     /** @use HasFactory<PlanFactory> */
     use HasFactory;
+
     use HasSlug;
     use HasTranslations;
     use SoftDeletes;
@@ -65,7 +66,7 @@ class Plan extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'slug',
@@ -198,8 +199,6 @@ class Plan extends Model
 
     /**
      * Create a new factory instance for the model.
-     *
-     * @return PlanFactory
      */
     protected static function newFactory(): PlanFactory
     {

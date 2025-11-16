@@ -7,15 +7,17 @@ parameters:
         - database
     level: 6
 
-    checkMissingIterableValueType: true
-    checkGenericClassInNonGenericObjectType: true
     inferPrivatePropertyTypeFromConstructor: true
     treatPhpDocTypesAsCertain: false
 
     excludePaths:
         - vendor/*
-        - tests/CreatesApplication.php
 
     universalObjectCratesClasses:
         - Illuminate\Support\Fluent
+
+    ignoreErrors:
+        -
+            message: '#Trait .* is used zero times and is not analysed.#'
+            path: src/Traits/HasPlanSubscriptions.php
 
