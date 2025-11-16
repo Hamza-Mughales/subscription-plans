@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Enums;
 
-enum Interval: string
+use Filament\Support\Contracts\HasLabel;
+
+enum Interval: string implements HasLabel
 {
     case Day = 'day';
     case Week = 'week';
@@ -13,7 +15,7 @@ enum Interval: string
 
     /**
      * Get the display label for the interval.
-     * Compatible with Filament's HasLabel interface if Filament is installed.
+     * Compatible with Filament's HasLabel interface.
      */
     public function getLabel(): string
     {

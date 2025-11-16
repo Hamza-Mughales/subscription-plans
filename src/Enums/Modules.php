@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Enums;
 
+use Filament\Support\Contracts\HasLabel;
+
 /**
  * Modules Enum
  *
@@ -27,7 +29,7 @@ namespace NootPro\SubscriptionPlans\Enums;
  *     // Add your project-specific modules here
  * }
  */
-enum Modules: string
+enum Modules: string implements HasLabel
 {
     /**
      * Example module cases - customize these for your project.
@@ -38,7 +40,7 @@ enum Modules: string
 
     /**
      * Get the display label for the module.
-     * Compatible with Filament's HasLabel interface if Filament is installed.
+     * Compatible with Filament's HasLabel interface.
      */
     public function getLabel(): string
     {

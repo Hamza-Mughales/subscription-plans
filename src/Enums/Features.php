@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Enums;
 
-enum Features: string
+use Filament\Support\Contracts\HasLabel;
+
+enum Features: string implements HasLabel
 {
     case Users = 'users';
 
     /**
      * Get the display label for the feature.
-     * Compatible with Filament's HasLabel interface if Filament is installed.
+     * Compatible with Filament's HasLabel interface.
      */
     public function getLabel(): string
     {

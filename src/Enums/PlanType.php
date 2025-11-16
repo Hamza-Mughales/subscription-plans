@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Enums;
 
-enum PlanType: string
+use Filament\Support\Contracts\HasLabel;
+
+enum PlanType: string implements HasLabel
 {
     case Plan = 'plan';
     case TestPlan = 'test_plan';
 
     /**
      * Get the display label for the plan type.
-     * Compatible with Filament's HasLabel interface if Filament is installed.
+     * Compatible with Filament's HasLabel interface.
      */
     public function getLabel(): string
     {

@@ -21,7 +21,8 @@
         "php": "^8.2",
         "laravel/framework": "^11.0|^12.0",
         "spatie/laravel-sluggable": "^3.7",
-        "spatie/laravel-translatable": "^6.0"
+        "spatie/laravel-translatable": "^6.0",
+        "filament/support": "^4.0"
     },
     "require-dev": {
         "orchestra/testbench": "^9.0|^10.0",
