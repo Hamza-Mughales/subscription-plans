@@ -3,8 +3,13 @@
 namespace NootPro\SubscriptionPlans\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use NootPro\SubscriptionPlans\Console\Commands\CheckExpiringSubscriptions;
+use NootPro\SubscriptionPlans\Console\Commands\DeactivateExpiredSubscriptions;
+use NootPro\SubscriptionPlans\Console\Commands\ResetFeatureUsage;
 use NootPro\SubscriptionPlans\Models\PlanSubscription;
 use NootPro\SubscriptionPlans\Observers\PlanSubscriptionObserver;
+use NootPro\SubscriptionPlans\Services\SubscriptionPlansService;
+use NootPro\SubscriptionPlans\Enums\Modules as ModulesEnum;
 
 class SubscriptionPlansServiceProvider extends ServiceProvider
 {
@@ -18,6 +23,11 @@ class SubscriptionPlansServiceProvider extends ServiceProvider
             __DIR__.'/../../config/subscription-plans.php',
             'subscription-plans'
         );
+
+        // Register service as singleton
+        $this->app->singleton('subscription-plans', function ($app) {
+            return new SubscriptionPlansService();
+        });
     }
 
     /**
@@ -43,6 +53,13 @@ class SubscriptionPlansServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../lang' => $this->app->langPath('vendor/subscription-plans'),
             ], 'subscription-plans-translations');
+
+            // Register commands
+            $this->commands([
+                CheckExpiringSubscriptions::class,
+                ResetFeatureUsage::class,
+                DeactivateExpiredSubscriptions::class,
+            ]);
         }
 
         // Load migrations
@@ -50,5 +67,10 @@ class SubscriptionPlansServiceProvider extends ServiceProvider
 
         // Register observers
         PlanSubscription::observe(PlanSubscriptionObserver::class);
+
+        // Load helper functions
+        if (file_exists($helperPath = __DIR__.'/../Helpers/subscription.php')) {
+            require_once $helperPath;
+        }
     }
 }

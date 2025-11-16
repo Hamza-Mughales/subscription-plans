@@ -32,7 +32,10 @@
     "autoload": {
         "psr-4": {
             "NootPro\\SubscriptionPlans\\": "src/"
-        }
+        },
+        "files": [
+            "src/Helpers/subscription.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -42,7 +45,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "NootPro\\SubscriptionPlans\\Providers\\SubscriptionPlansServiceProvider"
+                "NootPro\\SubscriptionPlans\\Providers\\SubscriptionPlansServiceProvider",
+                "NootPro\\SubscriptionPlans\\Providers\\EventServiceProvider"
             ]
         }
     },

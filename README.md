@@ -8,16 +8,23 @@ A comprehensive, flexible, and production-ready subscription and plans managemen
 
 ## Features
 
+### Core Features
 - ✅ Multiple subscription plans with pricing
 - ✅ Feature-based limits (unlimited, disabled, or numeric)
 - ✅ Usage tracking with automatic resets
 - ✅ Trial periods
 - ✅ Grace periods
 - ✅ Plan upgrades/downgrades with proration
-- ✅ Multilingual support
+- ✅ Multilingual support (Arabic, English)
 - ✅ Polymorphic subscribers (Company, User, etc.)
 - ✅ Soft deletes for history
 - ✅ Event-driven architecture
+- ✅ Module-based access control
+
+### Advanced Features
+- ✅ **Email Notifications** - Automated notifications for subscription events
+- ✅ **Subscription Middleware** - Protect routes with subscription validation
+- ✅ **Console Commands** - Automated subscription maintenance tasks
 
 ## Installation
 
@@ -48,9 +55,8 @@ Add the `HasPlanSubscriptions` trait to your subscriber model (e.g., User, Compa
 
 ```php
 use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
-use NootPro\SubscriptionPlans\Contracts\SubscriberInterface;
 
-class Company extends Model implements SubscriberInterface
+class Company extends Model
 {
     use HasPlanSubscriptions;
 }
@@ -137,6 +143,29 @@ protected $listen = [
     ],
 ];
 ```
+
+## Advanced Features
+
+### Email Notifications
+
+The package includes notifications for subscription events:
+
+```php
+use NootPro\SubscriptionPlans\Notifications\SubscriptionExpiringNotification;
+
+// Notifications are sent automatically via events
+// Configure in config/subscription-plans.php
+'notifications' => [
+    'enabled' => true,
+    'channels' => ['mail', 'database'],
+],
+```
+
+Available notifications:
+- `SubscriptionCreatedNotification` - When subscription is created
+- `SubscriptionExpiringNotification` - When subscription is about to expire
+- `SubscriptionExpiredNotification` - When subscription expires
+- `TrialEndingNotification` - When trial period is ending
 
 ## Usage Examples
 
@@ -225,9 +254,8 @@ Any model can be a subscriber by implementing the interface and using the trait:
 
 ```php
 use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
-use NootPro\SubscriptionPlans\Contracts\SubscriberInterface;
 
-class Team extends Model implements SubscriberInterface
+class Team extends Model
 {
     use HasPlanSubscriptions;
 }

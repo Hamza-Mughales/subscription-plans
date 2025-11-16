@@ -10,10 +10,12 @@ use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
 use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use NootPro\SubscriptionPlans\Database\Factories\PlanFactory;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
@@ -48,6 +50,7 @@ use Spatie\Translatable\HasTranslations;
  */
 class Plan extends Model
 {
+    use HasFactory;
     use HasSlug;
     use HasTranslations;
     use SoftDeletes;
@@ -184,5 +187,15 @@ class Plan extends Model
     public function modules(): HasMany
     {
         return $this->hasMany(PlanModule::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
+     */
+    protected static function newFactory()
+    {
+        return PlanFactory::new();
     }
 }

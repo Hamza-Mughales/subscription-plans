@@ -71,5 +71,91 @@ return [
         'allow_unlimited' => true, // Allow -1 for unlimited
         'auto_reset_usage' => true, // Auto-reset usage when period expires
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configure caching behavior for subscriptions
+    |
+    */
+    'cache' => [
+        'enabled' => env('SUBSCRIPTION_CACHE_ENABLED', true),
+        'ttl' => env('SUBSCRIPTION_CACHE_TTL', 30), // Cache TTL in minutes
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configure middleware behavior
+    |
+    */
+    'middleware' => [
+        'redirect_route' => env('SUBSCRIPTION_REDIRECT_ROUTE', 'subscription.plans'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Event Listeners
+    |--------------------------------------------------------------------------
+    |
+    | Control package event listeners and allow applications to extend/override.
+    |
+    | - enabled: When false, disables all default package listeners.
+    | - additional: An associative array of event FQCN => array of listener FQCNs
+    |   that should be registered in addition to the defaults (or alone if
+    |   enabled is false).
+    |
+    */
+    'listeners' => [
+        'enabled' => env('SUBSCRIPTION_LISTENERS_ENABLED', true),
+        'additional' => [
+            // \NootPro\SubscriptionPlans\Events\SubscriptionCreated::class => [
+            //     \App\Listeners\YourCustomListener::class,
+            // ],
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Subscriber Resolver
+    |--------------------------------------------------------------------------
+    |
+    | Custom callback to resolve the subscriber from the request.
+    | This is useful if you have a custom way of determining the subscriber.
+    |
+    | Example:
+    | 'subscriber_resolver' => function ($request) {
+    |     return $request->user()->company;
+    | },
+    |
+    */
+    'subscriber_resolver' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache TTL (Legacy - use cache.ttl instead)
+    |--------------------------------------------------------------------------
+    |
+    | @deprecated Use cache.ttl instead
+    |
+    */
+    'cache_ttl' => env('SUBSCRIPTION_CACHE_TTL', 30),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Notifications Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configure notification behavior for subscription events
+    |
+    */
+    'notifications' => [
+        'enabled' => env('SUBSCRIPTION_NOTIFICATIONS_ENABLED', true),
+        'channels' => ['mail', 'database'], // Available: mail, database, slack, etc.
+    ],
 ];
 

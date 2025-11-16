@@ -13,11 +13,13 @@ use NootPro\SubscriptionPlans\Traits\HasSlug;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use NootPro\SubscriptionPlans\Database\Factories\PlanSubscriptionFactory;
 use Illuminate\Support\Facades\DB;
 use LogicException;
 use Spatie\Sluggable\SlugOptions;
@@ -63,6 +65,7 @@ use Spatie\Translatable\HasTranslations;
 class PlanSubscription extends Model
 {
     use BelongsToPlan;
+    use HasFactory;
     use HasSlug;
     use HasTranslations;
     use SoftDeletes;
@@ -554,5 +557,15 @@ class PlanSubscription extends Model
         $query->update([
             'is_active' => false,
         ]);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory<static>
+     */
+    protected static function newFactory()
+    {
+        return PlanSubscriptionFactory::new();
     }
 }
