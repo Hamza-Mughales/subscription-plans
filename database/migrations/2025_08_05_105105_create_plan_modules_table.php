@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('plan_modules', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('plan_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('plan_id')->nullable();
             $table->string('module');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
