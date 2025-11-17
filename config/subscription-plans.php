@@ -146,17 +146,4 @@ return [
     |
     */
     'cache_ttl' => env('SUBSCRIPTION_CACHE_TTL', 30),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Notifications Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Configure notification behavior for subscription events
-    |
-    */
-    'notifications' => [
-        'enabled'  => env('SUBSCRIPTION_NOTIFICATIONS_ENABLED', true),
-        'channels' => ['mail', 'database'], // Available: mail, database, slack, etc.
-    ],
 ];

@@ -3,9 +3,6 @@
 namespace NootPro\SubscriptionPlans\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use NootPro\SubscriptionPlans\Console\Commands\CheckExpiringSubscriptions;
-use NootPro\SubscriptionPlans\Console\Commands\DeactivateExpiredSubscriptions;
-use NootPro\SubscriptionPlans\Console\Commands\ResetFeatureUsage;
 use NootPro\SubscriptionPlans\Models\PlanSubscription;
 use NootPro\SubscriptionPlans\Observers\PlanSubscriptionObserver;
 use NootPro\SubscriptionPlans\Services\SubscriptionPlansService;
@@ -52,13 +49,6 @@ class SubscriptionPlansServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../lang' => $this->app->langPath('vendor/subscription-plans'),
             ], 'subscription-plans-translations');
-
-            // Register commands
-            $this->commands([
-                CheckExpiringSubscriptions::class,
-                ResetFeatureUsage::class,
-                DeactivateExpiredSubscriptions::class,
-            ]);
         }
 
         // Load migrations
