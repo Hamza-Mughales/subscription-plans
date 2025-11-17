@@ -20,12 +20,12 @@ return [
     |
     */
     'models' => [
-        'plan'                        => \NootPro\SubscriptionPlans\Models\Plan::class,
-        'plan_subscription'           => \NootPro\SubscriptionPlans\Models\PlanSubscription::class,
-        'plan_feature'                => \NootPro\SubscriptionPlans\Models\PlanFeature::class,
-        'plan_subscription_usage'     => \NootPro\SubscriptionPlans\Models\PlanSubscriptionUsage::class,
-        'plan_subscription_feature'   => \NootPro\SubscriptionPlans\Models\PlanSubscriptionFeature::class,
-        'plan_module'                 => \NootPro\SubscriptionPlans\Models\PlanModule::class,
+        'plan'                      => \NootPro\SubscriptionPlans\Models\Plan::class,
+        'plan_subscription'         => \NootPro\SubscriptionPlans\Models\PlanSubscription::class,
+        'plan_feature'              => \NootPro\SubscriptionPlans\Models\PlanFeature::class,
+        'plan_subscription_usage'   => \NootPro\SubscriptionPlans\Models\PlanSubscriptionUsage::class,
+        'plan_subscription_feature' => \NootPro\SubscriptionPlans\Models\PlanSubscriptionFeature::class,
+        'plan_module'               => \NootPro\SubscriptionPlans\Models\PlanModule::class,
     ],
 
     /*
@@ -53,12 +53,12 @@ return [
     |
     */
     'table_names' => [
-        'plans'                        => 'plans',
-        'plan_features'                => 'plan_features',
-        'plan_subscriptions'           => 'plan_subscriptions',
-        'plan_subscription_usage'      => 'plan_subscription_usage',
-        'plan_subscription_features'   => 'plan_subscription_features',
-        'plan_modules'                 => 'plan_modules',
+        'plans'                      => 'plans',
+        'plan_features'              => 'plan_features',
+        'plan_subscriptions'         => 'plan_subscriptions',
+        'plan_subscription_usage'    => 'plan_subscription_usage',
+        'plan_subscription_features' => 'plan_subscription_features',
+        'plan_modules'               => 'plan_modules',
     ],
 
     /*

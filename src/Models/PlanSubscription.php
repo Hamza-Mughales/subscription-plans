@@ -505,7 +505,7 @@ class PlanSubscription extends Model
      * via config('subscription-plans.models.plan_subscription_feature') to use a
      * custom model class, or it will use DB facade to query the table directly.
      *
-     * @param string $featureSlug The slug of the feature
+     * @param  string  $featureSlug  The slug of the feature
      * @return int The quantity of the feature available (0 if not found)
      */
     public function getFeatureAvailableQuantity(string $featureSlug): int

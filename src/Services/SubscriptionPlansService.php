@@ -156,7 +156,7 @@ class SubscriptionPlansService
     {
         // Clear active subscription cache first
         $this->clearSubscriptionCache($subscriber);
-        
+
         $this->clearModuleCache($subscriber);
         $modulesEnum = config('subscription-plans.enums.modules');
         if (! $modulesEnum || ! enum_exists($modulesEnum)) {
