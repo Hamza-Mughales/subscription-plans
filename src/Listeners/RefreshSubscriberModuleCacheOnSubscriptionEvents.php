@@ -13,9 +13,16 @@ class RefreshSubscriberModuleCacheOnSubscriptionEvents
     public function handle(object $event): void
     {
         $subscription = $event->subscription ?? null;
-        $subscriber   = $subscription?->subscriber;
 
-        if (! $subscription || ! $subscriber) {
+        if (! $subscription) {
+            return;
+        }
+
+        // Ensure subscriber relationship is loaded
+        $subscription->loadMissing('subscriber');
+        $subscriber = $subscription->subscriber;
+
+        if (! $subscriber) {
             return;
         }
 
