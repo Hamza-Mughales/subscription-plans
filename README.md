@@ -18,7 +18,6 @@ A comprehensive, flexible, and production-ready subscription and plans managemen
 
 ### Advanced Features
 - ✅ **Subscription Middleware** - Protect routes with subscription validation
-- ✅ **Console Commands** - Automated subscription maintenance tasks
 
 ## Installation
 
