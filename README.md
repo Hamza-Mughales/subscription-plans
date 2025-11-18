@@ -1,9 +1,4 @@
 # Laravel Subscription Plans
-
-[![Tests](https://github.com/noot-web/subscription-plans/workflows/Tests/badge.svg)](https://github.com/noot-web/subscription-plans/actions)
-[![Latest Stable Version](https://poser.pugx.org/noot-web/subscription-plans/v/stable)](https://packagist.org/packages/noot-web/subscription-plans)
-[![License](https://poser.pugx.org/noot-web/subscription-plans/license)](https://packagist.org/packages/noot-web/subscription-plans)
-
 A comprehensive, flexible, and production-ready subscription and plans management system for Laravel applications. Perfect for SaaS applications, membership sites, and any project requiring subscription-based access control.
 
 ## Features
