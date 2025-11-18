@@ -30,6 +30,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Tenant Model
+    |--------------------------------------------------------------------------
+    |
+    | The model class that represents the tenant/company in your application.
+    | This is used by the ModulesGate trait to resolve the tenant for module checks.
+    |
+    | Example: \App\Models\Company::class
+    |
+    */
+    'tenant_model' => env('SUBSCRIPTION_TENANT_MODEL', null),
+
+    /*
+    |--------------------------------------------------------------------------
     | Enum Classes
     |--------------------------------------------------------------------------
     |

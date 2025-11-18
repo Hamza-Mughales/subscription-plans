@@ -23,4 +23,7 @@ parameters:
         -
             message: '#Trait .* is used zero times and is not analysed.#'
             path: src/Traits/TracksFeatureUsage.php
+        -
+            message: '#Trait .* is used zero times and is not analysed.#'
+            path: src/Traits/ModulesGate.php
 
