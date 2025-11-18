@@ -88,7 +88,7 @@ trait HasPlanSubscriptions
         return $subscription && $subscription->active();
     }
 
-    public function newPlanSubscription(string $subscription, Plan $plan, ?Carbon $startDate = null): PlanSubscription
+    public function newPlanSubscription(Plan $plan, ?Carbon $startDate = null, string $subscription = 'main'): PlanSubscription
     {
         // Deactivate all active subscriptions before creating a new one
         // This ensures only one subscription is active at a time

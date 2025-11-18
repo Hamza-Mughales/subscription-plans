@@ -101,7 +101,7 @@ $plan->features()->create([
 $company = Company::find(1);
 $plan = Plan::where('slug', 'pro-plan')->first();
 
-$subscription = $company->newPlanSubscription('main', $plan);
+$subscription = $company->newPlanSubscription($plan);
 ```
 
 ### 5. Track Usage

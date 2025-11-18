@@ -197,7 +197,7 @@ class SubscriptionController extends Controller
         $plan = Plan::findOrFail($validated['plan_id']);
         
         // Create subscription
-        $subscription = $company->newPlanSubscription('main', $plan);
+        $subscription = $company->newPlanSubscription($plan);
         
         return redirect()->route('dashboard')
             ->with('success', 'Successfully subscribed to ' . $plan->name);
@@ -665,7 +665,7 @@ it('can subscribe a company to a plan', function () {
     $company = Company::factory()->create();
     $plan = Plan::factory()->create(['price' => 99.00]);
 
-    $subscription = $company->newPlanSubscription('main', $plan);
+    $subscription = $company->newPlanSubscription($plan);
 
     expect($subscription)
         ->toBeActive()
@@ -680,7 +680,7 @@ it('tracks feature usage correctly', function () {
         'value' => 5,
     ]);
 
-    $subscription = $company->newPlanSubscription('main', $plan);
+    $subscription = $company->newPlanSubscription($plan);
 
     expect($subscription->canUseFeature('users'))->toBeTrue();
     
