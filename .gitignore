@@ -12,3 +12,6 @@ composer.lock
 *.log
 coverage/
 .phpstorm.meta.php
+.phpunit.cache/
+/build
+.php-cs-fixer.cache

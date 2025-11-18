@@ -29,4 +29,3 @@
         <env name="APP_KEY" value="base64:2fl+Ktvkuj1DAxnI0LDJl8MZrj3wGfKnxILwPiKMsJU="/>
     </php>
 </phpunit>
-
