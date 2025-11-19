@@ -3,16 +3,6 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Tax Rate
-    |--------------------------------------------------------------------------
-    |
-    | Default tax rate for subscriptions (15% = 0.15)
-    |
-    */
-    'tax_rate' => env('SUBSCRIPTION_TAX_RATE', 0.15),
-
-    /*
-    |--------------------------------------------------------------------------
     | Model Classes
     |--------------------------------------------------------------------------
     |
@@ -26,6 +16,10 @@ return [
         'plan_subscription_usage'   => \NootPro\SubscriptionPlans\Models\PlanSubscriptionUsage::class,
         'plan_subscription_feature' => \NootPro\SubscriptionPlans\Models\PlanSubscriptionFeature::class,
         'plan_module'               => \NootPro\SubscriptionPlans\Models\PlanModule::class,
+        'invoice'                   => \NootPro\SubscriptionPlans\Models\Invoice::class,
+        'invoice_item'              => \NootPro\SubscriptionPlans\Models\InvoiceItem::class,
+        'invoice_transaction'       => \NootPro\SubscriptionPlans\Models\InvoiceTransaction::class,
+        'payment_method'            => \NootPro\SubscriptionPlans\Models\PaymentMethod::class,
     ],
 
     /*
@@ -72,6 +66,10 @@ return [
         'plan_subscription_usage'    => 'plan_subscription_usage',
         'plan_subscription_features' => 'plan_subscription_features',
         'plan_modules'               => 'plan_modules',
+        'invoices'                   => 'invoices',
+        'invoice_items'              => 'invoice_items',
+        'invoice_transactions'       => 'invoice_transactions', // Table name (plural)
+        'payment_methods'            => 'payment_methods',
     ],
 
     /*
@@ -159,4 +157,41 @@ return [
     |
     */
     'cache_ttl' => env('SUBSCRIPTION_CACHE_TTL', 30),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Tax Rate (Legacy - use invoice.tax_rate instead)
+    |--------------------------------------------------------------------------
+    |
+    | @deprecated Use invoice.tax_rate instead
+    |
+    */
+    'tax_rate' => env('SUBSCRIPTION_TAX_RATE', 0.15),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Foreign Keys
+    |--------------------------------------------------------------------------
+    |
+    | Configure foreign key column names for tenant/subscriber relationships
+    |
+    */
+    'foreign_keys' => [
+        'subscriber_id' => env('SUBSCRIPTION_SUBSCRIBER_FOREIGN_KEY', 'subscriber_id'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Invoice Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configure invoice-related settings
+    |
+    */
+    'invoice' => [
+        'tax_rate'         => env('SUBSCRIPTION_TAX_RATE', 0.15),
+        'default_status'   => 'new',
+        'default_due_days' => 30,
+        'number_prefix'    => env('SUBSCRIPTION_INVOICE_PREFIX', 'INV'),
+    ],
 ];
