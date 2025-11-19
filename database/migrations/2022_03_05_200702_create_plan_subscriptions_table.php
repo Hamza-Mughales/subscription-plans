@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $tableName = config('subscription-plans.table_names.plan_subscriptions', 'plan_subscriptions');
+        $tableName  = config('subscription-plans.table_names.plan_subscriptions', 'plan_subscriptions');
         $plansTable = config('subscription-plans.table_names.plans', 'plan_plans');
-        
+
         Schema::create($tableName, function (Blueprint $table) use ($plansTable) {
             $table->id();
             $table->morphs('subscriber');

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         $tableName = config('subscription-plans.table_names.plans', 'plan_plans');
-        
+
         Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();

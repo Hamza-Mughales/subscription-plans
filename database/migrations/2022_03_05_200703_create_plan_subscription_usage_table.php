@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $tableName = config('subscription-plans.table_names.plan_subscription_usage', 'plan_subscription_usage');
+        $tableName              = config('subscription-plans.table_names.plan_subscription_usage', 'plan_subscription_usage');
         $planSubscriptionsTable = config('subscription-plans.table_names.plan_subscriptions', 'plan_subscriptions');
-        $planFeaturesTable = config('subscription-plans.table_names.plan_features', 'plan_features');
-        
+        $planFeaturesTable      = config('subscription-plans.table_names.plan_features', 'plan_features');
+
         Schema::create($tableName, function (Blueprint $table) use ($planSubscriptionsTable, $planFeaturesTable) {
             $table->id();
             $table->bigInteger('subscription_id')->unsigned()->nullable();
