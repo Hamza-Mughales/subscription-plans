@@ -11,6 +11,7 @@ A comprehensive, flexible, and production-ready subscription and plans managemen
 - ✅ Grace periods
 - ✅ Plan upgrades/downgrades with proration
 - ✅ **Invoice Management** - Complete invoicing system with transactions and payment tracking
+- ✅ **Payment Methods** - Manage payment methods with translatable names and type-based categorization
 - ✅ Multilingual support (Arabic, English)
 - ✅ Polymorphic subscribers (Company, User, etc.)
 - ✅ Soft deletes for history
@@ -253,15 +254,20 @@ Record payment transactions for an invoice:
 
 ```php
 use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
+use NootPro\SubscriptionPlans\Enums\PaymentMethodType;
 
+// Record payment with payment method type
 $transaction = $invoiceService->recordPayment(
     invoice: $invoice,
     amount: 99.00,
-    paymentMethod: 'credit_card',
+    paymentMethod: PaymentMethodType::BankTransfer->value, // or 'bank_transfer'
     transactionId: 'txn_1234567890',
     notes: 'Payment processed successfully',
     status: InvoiceTransactionStatus::Completed
 );
+
+// Access payment method relationship
+$paymentMethod = $transaction->paymentMethod; // Returns PaymentMethod model if exists
 ```
 
 ### Invoice Status Management
@@ -365,22 +371,61 @@ $invoiceNumber = $invoice->invoice_number; // Format: INV-202501-000001
 
 ### Payment Methods
 
-The package supports payment method management:
+The package supports payment method management with translatable names and type-based categorization:
 
 ```php
 use NootPro\SubscriptionPlans\Models\PaymentMethod;
+use NootPro\SubscriptionPlans\Enums\PaymentMethodType;
 
 // Create a payment method
 $paymentMethod = PaymentMethod::create([
-    'name' => ['en' => 'Credit Card', 'ar' => 'بطاقة ائتمان'],
-    'slug' => 'credit_card',
+    'name' => ['en' => 'Bank Transfer', 'ar' => 'تحويل بنكي'],
+    'type' => PaymentMethodType::BankTransfer,
     'is_active' => true,
     'is_default' => true,
 ]);
 
+// Create other payment methods
+PaymentMethod::create([
+    'name' => ['en' => 'Online Payment', 'ar' => 'دفع إلكتروني'],
+    'type' => PaymentMethodType::OnlinePayment,
+    'is_active' => true,
+    'is_default' => false,
+]);
+
+PaymentMethod::create([
+    'name' => ['en' => 'Visa', 'ar' => 'فيزا'],
+    'type' => PaymentMethodType::Visa,
+    'is_active' => true,
+    'is_default' => false,
+]);
+
 // Get payment method for transaction
 $method = $transaction->paymentMethod;
+
+// Query payment methods
+$activeMethods = PaymentMethod::where('is_active', true)->get();
+$defaultMethod = PaymentMethod::where('is_default', true)->first();
+
+// Get payment method type label (translated)
+$label = $paymentMethod->type->getLabel(); // Returns translated label
 ```
+
+#### Available Payment Method Types
+
+The package includes the following payment method types via the `PaymentMethodType` enum:
+
+- `BankTransfer` - Bank transfer payments
+- `OnlinePayment` - Online payment gateway
+- `Visa` - Visa card payments
+
+#### Payment Method Features
+
+- **Translatable Names**: Payment method names support multiple languages
+- **Type Safety**: Uses enum for type validation
+- **Default Method**: Only one payment method can be set as default (automatically managed)
+- **Active Status**: Control which payment methods are available
+- **Transaction Integration**: Payment methods are linked to invoice transactions via the `type` field
 
 ### Invoice Configuration
 
