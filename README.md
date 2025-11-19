@@ -10,6 +10,7 @@ A comprehensive, flexible, and production-ready subscription and plans managemen
 - ✅ Trial periods
 - ✅ Grace periods
 - ✅ Plan upgrades/downgrades with proration
+- ✅ **Invoice Management** - Complete invoicing system with transactions and payment tracking
 - ✅ Multilingual support (Arabic, English)
 - ✅ Polymorphic subscribers (Company, User, etc.)
 - ✅ Soft deletes for history
@@ -199,15 +200,220 @@ PlanSubscription::findEndingPeriod(7)->get(); // Ending in 7 days
 PlanSubscription::findEndingTrial(3)->get(); // Trial ending in 3 days
 ```
 
+## Invoice Management
+
+The package includes a comprehensive invoice management system for tracking subscription payments, transactions, and billing.
+
+### Add Invoiceable Trait
+
+Add the `Invoiceable` trait to your subscriber model to access invoice-related methods:
+
+```php
+use NootPro\SubscriptionPlans\Traits\Invoiceable;
+
+class Company extends Model
+{
+    use HasPlanSubscriptions, Invoiceable;
+}
+```
+
+### Create Invoice
+
+Create an invoice for a subscription using the `InvoiceService`:
+
+```php
+use NootPro\SubscriptionPlans\Services\InvoiceService;
+
+$invoiceService = app(InvoiceService::class);
+
+$invoice = $invoiceService->createInvoiceForSubscription(
+    subscriber: $company,
+    subscriptionId: $subscription->id,
+    amount: 99.00,
+    note: 'Monthly subscription payment'
+);
+```
+
+### Add Invoice Items
+
+Add line items to an invoice:
+
+```php
+$invoiceService->addItem(
+    invoice: $invoice,
+    description: 'Pro Plan - Monthly Subscription',
+    unitPrice: 99.00,
+    quantity: 1
+);
+```
+
+### Record Payments
+
+Record payment transactions for an invoice:
+
+```php
+use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
+
+$transaction = $invoiceService->recordPayment(
+    invoice: $invoice,
+    amount: 99.00,
+    paymentMethod: 'credit_card',
+    transactionId: 'txn_1234567890',
+    notes: 'Payment processed successfully',
+    status: InvoiceTransactionStatus::Completed
+);
+```
+
+### Invoice Status Management
+
+```php
+// Mark invoice as paid
+$invoiceService->markAsPaid($invoice);
+
+// Mark invoice as partially paid
+$invoiceService->markAsPartiallyPaid($invoice);
+
+// Cancel an invoice
+$invoiceService->cancel($invoice, 'Customer requested cancellation');
+
+// Get payment information
+$totalPaid = $invoiceService->getTotalPaid($invoice);
+$remaining = $invoiceService->getRemainingBalance($invoice);
+```
+
+### Query Invoices
+
+```php
+use NootPro\SubscriptionPlans\Models\Invoice;
+use NootPro\SubscriptionPlans\Enums\InvoiceStatus;
+
+// Get all invoices for a subscriber
+$invoices = $company->subscriptionInvoices;
+
+// Get paid invoices
+$paidInvoices = Invoice::paid()->get();
+
+// Get unpaid invoices
+$unpaidInvoices = Invoice::unpaid()->get();
+
+// Get overdue invoices
+$overdueInvoices = Invoice::overdue()->get();
+
+// Filter by status
+$newInvoices = Invoice::status(InvoiceStatus::New)->get();
+
+// Filter by subscriber
+$companyInvoices = Invoice::forSubscriber($company)->get();
+```
+
+### Invoice Relationships
+
+```php
+// Get invoice items
+$items = $invoice->items;
+
+// Get invoice transactions
+$transactions = $invoice->transactions;
+
+// Get related subscription
+$subscription = $invoice->subscription;
+
+// Get subscriber
+$subscriber = $invoice->subscriber;
+
+// Get total amount (amount + tax)
+$total = $invoice->total;
+```
+
+### Invoice Statuses
+
+Available invoice statuses:
+
+- `New` - Newly created invoice
+- `Pending` - Payment pending
+- `Paid` - Fully paid
+- `PartiallyPaid` - Partially paid
+- `Overdue` - Payment overdue
+- `Cancelled` - Invoice cancelled
+- `Refunded` - Payment refunded
+
+### Transaction Statuses
+
+Available transaction statuses:
+
+- `Pending` - Transaction pending
+- `Completed` - Transaction completed
+- `Failed` - Transaction failed
+- `Refunded` - Transaction refunded
+
+### Invoice Helper Methods
+
+```php
+// Check if invoice is paid
+if ($invoice->isPaid()) {
+    // Invoice is fully paid
+}
+
+// Check if invoice is overdue
+if ($invoice->isOverdue()) {
+    // Invoice is overdue
+}
+
+// Get invoice number (auto-generated)
+$invoiceNumber = $invoice->invoice_number; // Format: INV-202501-000001
+```
+
+### Payment Methods
+
+The package supports payment method management:
+
+```php
+use NootPro\SubscriptionPlans\Models\PaymentMethod;
+
+// Create a payment method
+$paymentMethod = PaymentMethod::create([
+    'name' => ['en' => 'Credit Card', 'ar' => 'بطاقة ائتمان'],
+    'slug' => 'credit_card',
+    'is_active' => true,
+    'is_default' => true,
+]);
+
+// Get payment method for transaction
+$method = $transaction->paymentMethod;
+```
+
+### Invoice Configuration
+
+Configure invoice settings in `config/subscription-plans.php`:
+
+```php
+'invoice' => [
+    'tax_rate'         => env('SUBSCRIPTION_TAX_RATE', 0.15), // 15% tax
+    'default_status'   => 'new',
+    'default_due_days' => 30, // Invoice due in 30 days
+    'number_prefix'    => env('SUBSCRIPTION_INVOICE_PREFIX', 'INV'),
+],
+```
+
+### Calculate Tax
+
+Calculate tax for any amount:
+
+```php
+$tax = $invoiceService->calculateTax(100.00); // Uses default tax rate
+$tax = $invoiceService->calculateTax(100.00, 0.20); // Custom 20% tax rate
+```
+
 ## Configuration
 
 Edit `config/subscription-plans.php` to customize:
 
-- Tax rate
-- Model classes
+- Tax rate and invoice settings
+- Model classes (including invoice models)
 - Enum classes
-- Table names
+- Table names (including invoice tables)
 - Feature behavior
+- Invoice configuration (tax rate, default status, due days, number prefix)
 
 ## Requirements
 
