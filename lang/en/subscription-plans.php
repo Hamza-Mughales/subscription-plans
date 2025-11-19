@@ -67,4 +67,25 @@ return [
         'view_plans'         => 'View Plans',
         'thank_you'          => 'Thank you for using our application!',
     ],
+
+    'invoice_type' => [
+        'subscription' => 'Subscription',
+    ],
+
+    'invoice_status' => [
+        'new'            => 'New',
+        'pending'        => 'Pending',
+        'paid'           => 'Paid',
+        'partially_paid' => 'Partially Paid',
+        'overdue'        => 'Overdue',
+        'cancelled'      => 'Cancelled',
+        'refunded'       => 'Refunded',
+    ],
+
+    'invoice_transaction_status' => [
+        'pending'   => 'Pending',
+        'completed' => 'Completed',
+        'failed'    => 'Failed',
+        'refunded'  => 'Refunded',
+    ],
 ];
