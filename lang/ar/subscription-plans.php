@@ -88,4 +88,10 @@ return [
         'failed'    => 'فاشل',
         'refunded'  => 'مسترد',
     ],
+
+    'payment-method-type' => [
+        'bank_transfer'  => 'تحويل بنكي',
+        'online_payment' => 'دفع إلكتروني',
+        'visa'           => 'فيزا',
+    ],
 ];

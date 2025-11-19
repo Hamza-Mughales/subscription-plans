@@ -88,4 +88,10 @@ return [
         'failed'    => 'Failed',
         'refunded'  => 'Refunded',
     ],
+
+    'payment-method-type' => [
+        'bank_transfer'  => 'Bank Transfer',
+        'online_payment' => 'Online Payment',
+        'visa'           => 'Visa',
+    ],
 ];
