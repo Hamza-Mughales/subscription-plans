@@ -7,6 +7,15 @@ namespace NootPro\SubscriptionPlans\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * InvoiceItem.
+ *
+ * @property int $invoice_id
+ * @property string $description
+ * @property int $quantity
+ * @property float $unit_price
+ * @property float $total
+ */
 class InvoiceItem extends Model
 {
     protected $fillable = [
@@ -40,12 +49,15 @@ class InvoiceItem extends Model
         $this->table = config('subscription-plans.table_names.invoice_items', 'plan_invoice_items');
     }
 
+    /**
+     * @return BelongsTo<Invoice, $this>
+     */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(
-            config('subscription-plans.models.invoice'),
-            'invoice_id'
-        );
+        /** @var class-string<Invoice> $modelClass */
+        $modelClass = config('subscription-plans.models.invoice');
+
+        return $this->belongsTo($modelClass, 'invoice_id');
     }
 
     /**
@@ -58,9 +70,14 @@ class InvoiceItem extends Model
 
     /**
      * Get subscriber through invoice relationship.
+     *
+     * @return BelongsTo<Model, Invoice>
      */
-    public function subscriber()
+    public function subscriber(): BelongsTo
     {
-        return $this->invoice->subscriber();
+        /** @var Invoice $invoice */
+        $invoice = $this->invoice;
+
+        return $invoice->subscriber();
     }
 }

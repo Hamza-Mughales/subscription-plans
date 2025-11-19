@@ -16,6 +16,8 @@ enum InvoiceStatus: string
 
     /**
      * Get all status values as array.
+     *
+     * @return array<int, string>
      */
     public static function values(): array
     {

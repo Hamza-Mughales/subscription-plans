@@ -55,12 +55,15 @@ class InvoiceService
     {
         $total = $unitPrice * $quantity;
 
-        return $invoice->items()->create([
+        /** @var InvoiceItem $item */
+        $item = $invoice->items()->create([
             'description' => $description,
             'quantity'    => $quantity,
             'unit_price'  => $unitPrice,
             'total'       => $total,
         ]);
+
+        return $item;
     }
 
     /**
@@ -74,6 +77,7 @@ class InvoiceService
         ?string $notes = null,
         InvoiceTransactionStatus $status = InvoiceTransactionStatus::Completed
     ): InvoiceTransaction {
+        /** @var InvoiceTransaction $transaction */
         $transaction = $invoice->transactions()->create([
             'amount'         => $amount,
             'payment_method' => $paymentMethod,

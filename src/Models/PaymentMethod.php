@@ -8,10 +8,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * PaymentMethod.
+ *
+ * @property string $name
+ * @property string $slug
+ * @property bool $is_active
+ * @property bool $is_default
+ */
 class PaymentMethod extends Model
 {
+    /** @use HasFactory<\Illuminate\Database\Eloquent\Factories\Factory> */
     use HasFactory, HasTranslations;
 
+    /** @var array<int, string> */
     public array $translatable = ['name'];
 
     protected $fillable = [

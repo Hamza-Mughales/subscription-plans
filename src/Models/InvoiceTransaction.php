@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
 
+/**
+ * InvoiceTransaction.
+ *
+ * @property int $invoice_id
+ * @property float $amount
+ * @property string|null $payment_method
+ * @property string|null $transaction_id
+ * @property InvoiceTransactionStatus $status
+ * @property string|null $notes
+ */
 class InvoiceTransaction extends Model
 {
     protected $fillable = [
@@ -30,31 +40,40 @@ class InvoiceTransaction extends Model
         $this->table = config('subscription-plans.table_names.invoice_transactions', 'plan_invoice_transactions'); // Table name is plural
     }
 
+    /**
+     * @return BelongsTo<Invoice, $this>
+     */
     public function invoice(): BelongsTo
     {
-        return $this->belongsTo(
-            config('subscription-plans.models.invoice'),
-            'invoice_id'
-        );
+        /** @var class-string<Invoice> $modelClass */
+        $modelClass = config('subscription-plans.models.invoice');
+
+        return $this->belongsTo($modelClass, 'invoice_id');
     }
 
     /**
      * Get subscriber through invoice relationship.
+     *
+     * @return BelongsTo<Model, Invoice>
      */
-    public function subscriber()
+    public function subscriber(): BelongsTo
     {
-        return $this->invoice->subscriber();
+        /** @var Invoice $invoice */
+        $invoice = $this->invoice;
+
+        return $invoice->subscriber();
     }
 
     /**
      * Get payment method relationship (optional - payment_method can be string or reference).
+     *
+     * @return BelongsTo<PaymentMethod, $this>
      */
     public function paymentMethod(): BelongsTo
     {
-        return $this->belongsTo(
-            config('subscription-plans.models.payment_method'),
-            'payment_method',
-            'slug'
-        );
+        /** @var class-string<PaymentMethod> $modelClass */
+        $modelClass = config('subscription-plans.models.payment_method');
+
+        return $this->belongsTo($modelClass, 'payment_method', 'slug');
     }
 }

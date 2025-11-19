@@ -4,12 +4,33 @@ declare(strict_types=1);
 
 namespace NootPro\SubscriptionPlans\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use NootPro\SubscriptionPlans\Enums\InvoiceStatus;
 
+/**
+ * Invoice.
+ *
+ * @property string $invoice_number
+ * @property int $subscription_id
+ * @property float $amount
+ * @property float $tax
+ * @property InvoiceStatus $status
+ * @property Carbon|null $due_date
+ * @property Carbon|null $exp_date
+ * @property bool $paid
+ * @property string|null $note
+ * @property-read float $total
+ *
+ * @method static Builder|Invoice paid()
+ * @method static Builder|Invoice unpaid()
+ * @method static Builder|Invoice overdue()
+ * @method static Builder|Invoice status(InvoiceStatus $status)
+ * @method static Builder|Invoice forSubscriber($subscriber)
+ */
 class Invoice extends Model
 {
     protected $fillable = [
@@ -81,41 +102,51 @@ class Invoice extends Model
         return sprintf('%s-%s%s-%06d', $prefix, $year, $month, $sequence);
     }
 
+    /**
+     * @return HasMany<InvoiceItem, $this>
+     */
     public function items(): HasMany
     {
-        return $this->hasMany(
-            config('subscription-plans.models.invoice_item'),
-            'invoice_id'
-        );
+        /** @var class-string<InvoiceItem> $modelClass */
+        $modelClass = config('subscription-plans.models.invoice_item');
+
+        return $this->hasMany($modelClass, 'invoice_id');
     }
 
+    /**
+     * @return HasMany<InvoiceTransaction, $this>
+     */
     public function transactions(): HasMany
     {
-        return $this->hasMany(
-            config('subscription-plans.models.invoice_transaction'),
-            'invoice_id'
-        );
+        /** @var class-string<InvoiceTransaction> $modelClass */
+        $modelClass = config('subscription-plans.models.invoice_transaction');
+
+        return $this->hasMany($modelClass, 'invoice_id');
     }
 
+    /**
+     * @return BelongsTo<PlanSubscription, $this>
+     */
     public function subscription(): BelongsTo
     {
-        return $this->belongsTo(
-            config('subscription-plans.models.plan_subscription'),
-            'subscription_id'
-        );
+        /** @var class-string<PlanSubscription> $modelClass */
+        $modelClass = config('subscription-plans.models.plan_subscription');
+
+        return $this->belongsTo($modelClass, 'subscription_id');
     }
 
     /**
      * Get the subscriber model (polymorphic or direct relationship)
+     *
+     * @return BelongsTo<Model, $this>
      */
     public function subscriber(): BelongsTo
     {
         $subscriberKey = config('subscription-plans.foreign_keys.subscriber_id', 'subscriber_id');
+        /** @var class-string<Model> $modelClass */
+        $modelClass = config('subscription-plans.tenant_model');
 
-        return $this->belongsTo(
-            config('subscription-plans.tenant_model'),
-            $subscriberKey
-        );
+        return $this->belongsTo($modelClass, $subscriberKey);
     }
 
     /**
@@ -144,6 +175,9 @@ class Invoice extends Model
 
     /**
      * Scope a query to only include paid invoices.
+     *
+     * @param  Builder<Invoice>  $query
+     * @return Builder<Invoice>
      */
     public function scopePaid(Builder $query): Builder
     {
@@ -152,6 +186,9 @@ class Invoice extends Model
 
     /**
      * Scope a query to only include unpaid invoices.
+     *
+     * @param  Builder<Invoice>  $query
+     * @return Builder<Invoice>
      */
     public function scopeUnpaid(Builder $query): Builder
     {
@@ -160,6 +197,9 @@ class Invoice extends Model
 
     /**
      * Scope a query to only include overdue invoices.
+     *
+     * @param  Builder<Invoice>  $query
+     * @return Builder<Invoice>
      */
     public function scopeOverdue(Builder $query): Builder
     {
@@ -170,6 +210,9 @@ class Invoice extends Model
 
     /**
      * Scope a query to filter by status.
+     *
+     * @param  Builder<Invoice>  $query
+     * @return Builder<Invoice>
      */
     public function scopeStatus(Builder $query, InvoiceStatus $status): Builder
     {
@@ -178,11 +221,14 @@ class Invoice extends Model
 
     /**
      * Scope a query to filter by subscriber.
+     *
+     * @param  Builder<Invoice>  $query
+     * @return Builder<Invoice>
      */
-    public function scopeForSubscriber(Builder $query, $subscriber): Builder
+    public function scopeForSubscriber(Builder $query, Model|int $subscriber): Builder
     {
         $subscriberKey = config('subscription-plans.foreign_keys.subscriber_id', 'subscriber_id');
 
-        return $query->where($subscriberKey, $subscriber->id ?? $subscriber);
+        return $query->where($subscriberKey, $subscriber instanceof Model ? $subscriber->getKey() : $subscriber);
     }
 }
