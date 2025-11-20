@@ -95,7 +95,7 @@ use NootPro\SubscriptionPlans\Enums\Features;
 use NootPro\SubscriptionPlans\Enums\Interval;
 
 $plan->features()->create([
-    'slug' => Features::Users->value,
+    'code' => Features::Users->value,
     'name' => ['en' => 'Users'],
     'value' => 10, // 10 users allowed
     'resettable_period' => 0, // No reset

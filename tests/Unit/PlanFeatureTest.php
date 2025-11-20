@@ -24,7 +24,7 @@ beforeEach(function () {
 
 it('can create a plan feature', function () {
     $feature = $this->plan->features()->create([
-        'slug'                => Features::Users->value,
+        'code'                => Features::Users->value,
         'name'                => ['en' => 'Users'],
         'value'               => 10,
         'resettable_period'   => 1,
@@ -34,13 +34,13 @@ it('can create a plan feature', function () {
 
     expect($feature)
         ->toBeInstanceOf(PlanFeature::class)
-        ->slug->toBe(Features::Users->value)
+        ->code->toBe(Features::Users->value)
         ->value->toBe(10);
 });
 
 it('can get feature by slug', function () {
     $this->plan->features()->create([
-        'slug'  => Features::Users->value,
+        'code'  => Features::Users->value,
         'name'  => ['en' => 'Users'],
         'value' => 5,
     ]);
@@ -49,7 +49,7 @@ it('can get feature by slug', function () {
 
     expect($feature)
         ->not->toBeNull()
-        ->slug->toBe(Features::Users->value)
+        ->code->toBe(Features::Users->value)
         ->value->toBe(5);
 });
 
@@ -61,7 +61,7 @@ it('returns null for non-existent feature', function () {
 
 it('can handle unlimited feature value', function () {
     $feature = $this->plan->features()->create([
-        'slug'  => 'unlimited-feature',
+        'code'  => 'unlimited-feature',
         'name'  => ['en' => 'Unlimited Feature'],
         'value' => -1, // Unlimited
     ]);
@@ -71,7 +71,7 @@ it('can handle unlimited feature value', function () {
 
 it('can handle disabled feature value', function () {
     $feature = $this->plan->features()->create([
-        'slug'  => 'disabled-feature',
+        'code'  => 'disabled-feature',
         'name'  => ['en' => 'Disabled Feature'],
         'value' => 0, // Disabled
     ]);

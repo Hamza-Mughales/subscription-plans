@@ -383,7 +383,7 @@ class PlanSubscription extends Model
 
     public function recordFeatureUsage(string $featureSlug, int $uses = 1, bool $incremental = true): PlanSubscriptionUsage
     {
-        $feature = $this->plan->features()->where('slug', $featureSlug)->firstOrFail();
+        $feature = $this->plan->features()->where('code', $featureSlug)->firstOrFail();
 
         $usage = $this->usage()->firstOrNew([
             'subscription_id' => $this->getKey(),
@@ -465,7 +465,7 @@ class PlanSubscription extends Model
 
     public function getFeatureValue(string $featureSlug): int
     {
-        $feature = $this->plan->features()->where('slug', $featureSlug)->first();
+        $feature = $this->plan->features()->where('code', $featureSlug)->first();
 
         return (int) ($feature->value ?? 0);
     }
@@ -525,8 +525,8 @@ class PlanSubscription extends Model
             return 0;
         }
 
-        // Find the feature by slug
-        $feature = $this->plan->features()->where('slug', $featureSlug)->first();
+        // Find the feature by code
+        $feature = $this->plan->features()->where('code', $featureSlug)->first();
 
         if (! $feature) {
             return 0;
@@ -569,7 +569,7 @@ class PlanSubscription extends Model
     public function decreaseUsage(string $featureSlug, int $amount = 1): void
     {
         /** @var PlanFeature|null $feature */
-        $feature = $this->plan->features()->where('slug', $featureSlug)->first();
+        $feature = $this->plan->features()->where('code', $featureSlug)->first();
 
         if (! $feature) {
             return;

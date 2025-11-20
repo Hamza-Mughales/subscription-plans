@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create($tableName, function (Blueprint $table) use ($plansTable) {
             $table->id();
             $table->unsignedBigInteger('plan_id')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('code')->nullable();
             $table->json('name');
             $table->json('description')->nullable();
             $table->string('value')->nullable();
@@ -36,7 +36,7 @@ return new class extends Migration
                 ->onDelete('cascade')->onUpdate('cascade');
 
             // Performance Indexes
-            $table->index(['plan_id', 'slug'], 'plan_slug_index');
+            $table->index(['plan_id', 'code'], 'plan_code_index');
         });
     }
 

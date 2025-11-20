@@ -97,7 +97,7 @@ class PlansSeeder extends Seeder
 
         // Add features
         $freePlan->features()->create([
-            'slug' => Features::Users->value,
+            'code' => Features::Users->value,
             'name' => ['en' => 'Users', 'ar' => 'المستخدمين'],
             'value' => 1, // 1 user
             'resettable_period' => 0,
@@ -126,7 +126,7 @@ class PlansSeeder extends Seeder
         ]);
 
         $proPlan->features()->create([
-            'slug' => Features::Users->value,
+            'code' => Features::Users->value,
             'name' => ['en' => 'Users', 'ar' => 'المستخدمين'],
             'value' => 10, // 10 users
             'resettable_period' => 0,
@@ -155,7 +155,7 @@ class PlansSeeder extends Seeder
         ]);
 
         $enterprisePlan->features()->create([
-            'slug' => Features::Users->value,
+            'code' => Features::Users->value,
             'name' => ['en' => 'Users', 'ar' => 'المستخدمين'],
             'value' => -1, // Unlimited users
             'resettable_period' => 0,
@@ -771,7 +771,7 @@ composer test-coverage
 - Ensure no other active subscription exists
 
 ### Feature usage not tracking
-- Verify feature slug matches exactly
+- Verify feature code matches exactly
 - Check if feature exists in plan
 - Ensure `recordFeatureUsage()` is called after action
 

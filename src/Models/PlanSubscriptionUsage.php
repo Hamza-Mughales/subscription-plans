@@ -86,7 +86,7 @@ class PlanSubscriptionUsage extends Model
      */
     public function scopeByFeatureSlug(Builder $builder, string $featureSlug, int $planId): Builder
     {
-        $feature = \NootPro\SubscriptionPlans\Models\PlanFeature::where('plan_id', $planId)->where('slug', $featureSlug)->firstOrFail();
+        $feature = \NootPro\SubscriptionPlans\Models\PlanFeature::where('plan_id', $planId)->where('code', $featureSlug)->firstOrFail();
 
         return $builder->where('feature_id', $feature->getKey());
     }

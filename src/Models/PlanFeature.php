@@ -22,7 +22,7 @@ use Spatie\Translatable\HasTranslations;
  * PlanFeature.
  *
  * @property int $plan_id
- * @property string $slug
+ * @property string $code
  * @property string $resettable_interval
  * @property int $resettable_period
  * @property-read Plan $plan
@@ -37,7 +37,7 @@ use Spatie\Translatable\HasTranslations;
  * @method static Builder|PlanFeature wherePlanId($value)
  * @method static Builder|PlanFeature whereResettableInterval($value)
  * @method static Builder|PlanFeature whereResettablePeriod($value)
- * @method static Builder|PlanFeature whereSlug($value)
+ * @method static Builder|PlanFeature whereCode($value)
  * @method static Builder|PlanFeature whereSortOrder($value)
  * @method static Builder|PlanFeature whereUpdatedAt($value)
  * @method static Builder|PlanFeature whereValue($value)
@@ -62,7 +62,7 @@ class PlanFeature extends Model
      */
     protected $fillable = [
         'plan_id',
-        'slug',
+        'code',
         'name',
         'description',
         'value',
@@ -93,8 +93,8 @@ class PlanFeature extends Model
         });
 
         static::creating(function (PlanFeature $feature) {
-            if (static::where('plan_id', $feature->plan_id)->where('slug', $feature->slug)->exists()) {
-                throw new InvalidArgumentException('Each plan should only have one feature with the same slug');
+            if (static::where('plan_id', $feature->plan_id)->where('code', $feature->code)->exists()) {
+                throw new InvalidArgumentException('Each plan should only have one feature with the same code');
             }
         });
     }
@@ -105,20 +105,20 @@ class PlanFeature extends Model
             ->doNotGenerateSlugsOnUpdate()
             ->generateSlugsFrom('name')
             ->allowDuplicateSlugs()
-            ->saveSlugsTo('slug');
+            ->saveSlugsTo('code');
     }
 
     /**
-     * Ensure slug is always stored as a string
+     * Ensure code is always stored as a string
      *
      * @param  mixed  $value
      */
-    public function setSlugAttribute($value): void
+    public function setCodeAttribute($value): void
     {
         if ($value instanceof Features || $value instanceof \BackedEnum) {
-            $this->attributes['slug'] = $value->value;
+            $this->attributes['code'] = $value->value;
         } else {
-            $this->attributes['slug'] = $value;
+            $this->attributes['code'] = $value;
         }
     }
 

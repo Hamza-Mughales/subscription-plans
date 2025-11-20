@@ -102,7 +102,7 @@ trait TracksFeatureUsage
             return false;
         }
 
-        return $plan->features()->where('slug', $featureSlug)->exists();
+        return $plan->features()->where('code', $featureSlug)->exists();
     }
 
     /**

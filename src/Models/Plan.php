@@ -182,7 +182,7 @@ class Plan extends Model
 
     public function getFeatureBySlug(string $featureSlug): ?PlanFeature
     {
-        return $this->features()->where('slug', $featureSlug)->first();
+        return $this->features()->where('code', $featureSlug)->first();
     }
 
     public function activate(): self
