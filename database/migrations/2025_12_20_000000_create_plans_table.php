@@ -13,7 +13,8 @@ return new class extends Migration
     {
         $tableName = config('subscription-plans.table_names.plans', 'plan_plans');
 
-        Schema::create($tableName, function (Blueprint $table) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
             $table->string('type')->nullable();
@@ -41,7 +42,8 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
-        });
+            });
+        }
     }
 
     /**

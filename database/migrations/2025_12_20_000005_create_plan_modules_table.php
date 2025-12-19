@@ -11,33 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $tableName  = config('subscription-plans.table_names.plan_features', 'plan_features');
+        $tableName  = config('subscription-plans.table_names.plan_modules', 'plan_modules');
         $plansTable = config('subscription-plans.table_names.plans', 'plan_plans');
 
-        Schema::create($tableName, function (Blueprint $table) use ($plansTable) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) use ($plansTable) {
             $table->id();
             $table->unsignedBigInteger('plan_id')->nullable();
-            $table->string('code')->nullable();
-            $table->json('name');
-            $table->json('description')->nullable();
-            $table->string('value')->nullable();
-            $table->smallInteger('resettable_period')->unsigned()->default(0);
-            $table->string('resettable_interval')->default('month');
-            $table->mediumInteger('sort_order')->unsigned()->default(0);
-            $table->decimal('price', 10, 2)->default(0.00);
-
+            $table->string('module');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            // Foreign Keys
+            // Indexes
             $table->foreign('plan_id')->references('id')->on($plansTable)
                 ->onDelete('cascade')->onUpdate('cascade');
-
-            // Performance Indexes
-            $table->index(['plan_id', 'code'], 'plan_code_index');
-        });
+            });
+        }
     }
 
     /**
@@ -45,7 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $tableName = config('subscription-plans.table_names.plan_features', 'plan_features');
+        $tableName = config('subscription-plans.table_names.plan_modules', 'plan_modules');
         Schema::dropIfExists($tableName);
     }
 };

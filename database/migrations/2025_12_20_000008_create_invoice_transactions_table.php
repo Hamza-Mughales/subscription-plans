@@ -11,7 +11,8 @@ return new class extends Migration
         $tableName     = config('subscription-plans.table_names.invoice_transactions', 'plan_invoice_transactions');
         $invoicesTable = config('subscription-plans.table_names.invoices', 'plan_invoices');
 
-        Schema::create($tableName, function (Blueprint $table) use ($invoicesTable) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) use ($invoicesTable) {
             $table->id();
             $table->foreignId('invoice_id')->constrained($invoicesTable)->onDelete('cascade');
             $table->decimal('amount', 10, 2);
@@ -24,7 +25,8 @@ return new class extends Migration
             $table->index('status');
             $table->index('payment_method');
             $table->index('transaction_id');
-        });
+            });
+        }
     }
 
     public function down(): void

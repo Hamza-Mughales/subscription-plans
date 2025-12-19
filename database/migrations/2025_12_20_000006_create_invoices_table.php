@@ -12,7 +12,8 @@ return new class extends Migration
         $subscriberKey          = config('subscription-plans.foreign_keys.subscriber_id', 'subscriber_id');
         $planSubscriptionsTable = config('subscription-plans.table_names.plan_subscriptions', 'plan_subscriptions');
 
-        Schema::create($tableName, function (Blueprint $table) use ($subscriberKey, $planSubscriptionsTable) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) use ($subscriberKey, $planSubscriptionsTable) {
             $table->id();
             $table->string('invoice_number')->unique();
             $table->foreignId('subscription_id')->constrained($planSubscriptionsTable)->onDelete('cascade');
@@ -32,7 +33,8 @@ return new class extends Migration
             $table->index('paid');
             $table->index('due_date');
             $table->index('invoice_number');
-        });
+            });
+        }
     }
 
     public function down(): void

@@ -14,7 +14,8 @@ return new class extends Migration
         $tableName  = config('subscription-plans.table_names.plan_subscriptions', 'plan_subscriptions');
         $plansTable = config('subscription-plans.table_names.plans', 'plan_plans');
 
-        Schema::create($tableName, function (Blueprint $table) use ($plansTable) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) use ($plansTable) {
             $table->id();
             $table->morphs('subscriber');
             $table->bigInteger('plan_id')->unsigned()->nullable();
@@ -45,7 +46,8 @@ return new class extends Migration
             $table->index(['plan_id', 'is_active'], 'plan_active_index');
             $table->index('trial_ends_at');
             $table->index('canceled_at');
-        });
+            });
+        }
     }
 
     /**

@@ -10,7 +10,8 @@ return new class extends Migration
     {
         $tableName = config('subscription-plans.table_names.payment_methods', 'plan_payment_methods');
 
-        Schema::create($tableName, function (Blueprint $table) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) {
             $table->id();
             $table->json('name');
             $table->string('type');
@@ -23,7 +24,8 @@ return new class extends Migration
             $table->index('type');
             $table->index('is_active');
             $table->index('is_default');
-        });
+            });
+        }
     }
 
     public function down(): void
