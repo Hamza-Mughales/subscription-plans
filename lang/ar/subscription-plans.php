@@ -11,6 +11,7 @@ return [
     ],
 
     'interval' => [
+        'hour'  => 'ساعة',
         'day'   => 'يوم',
         'week'  => 'أسبوع',
         'month' => 'شهر',

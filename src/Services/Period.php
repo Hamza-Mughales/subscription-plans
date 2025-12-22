@@ -20,7 +20,7 @@ class Period
     /**
      * Valid interval types.
      */
-    private const VALID_INTERVALS = ['day', 'week', 'month', 'year'];
+    private const VALID_INTERVALS = ['hour', 'day', 'week', 'month', 'year'];
 
     public function __construct(string $interval = 'month', int $count = 1, ?Carbon $start = null)
     {
