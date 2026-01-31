@@ -27,7 +27,7 @@ A comprehensive, flexible, and production-ready subscription and plans managemen
 ### Via Composer
 
 ```bash
-composer require noot-web/subscription-plans
+composer require hamza-mughales/laravel-subscriptions
 ```
 
 ### Publish Migrations
@@ -56,7 +56,7 @@ php artisan vendor:publish --tag=subscription-plans-translations
 Add the `HasPlanSubscriptions` trait to your subscriber model (e.g., User, Company):
 
 ```php
-use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
+use HamzaMughales\SubscriptionPlans\Traits\HasPlanSubscriptions;
 
 class Company extends Model
 {
@@ -67,10 +67,10 @@ class Company extends Model
 ### 2. Create a Plan
 
 ```php
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Enums\PlanType;
-use NootPro\SubscriptionPlans\Enums\Interval;
+use HamzaMughales\SubscriptionPlans\Models\Plan;
+use HamzaMughales\SubscriptionPlans\Enums\SubscriptionModel;
+use HamzaMughales\SubscriptionPlans\Enums\PlanType;
+use HamzaMughales\SubscriptionPlans\Enums\Interval;
 
 $plan = Plan::create([
     'name' => ['en' => 'Pro Plan'],
@@ -91,8 +91,8 @@ $plan = Plan::create([
 ### 3. Add Features to Plan
 
 ```php
-use NootPro\SubscriptionPlans\Enums\Features;
-use NootPro\SubscriptionPlans\Enums\Interval;
+use HamzaMughales\SubscriptionPlans\Enums\Features;
+use HamzaMughales\SubscriptionPlans\Enums\Interval;
 
 $plan->features()->create([
     'code' => Features::Users->value,
@@ -140,7 +140,7 @@ The package fires events for subscription lifecycle:
 Listen to events in your `EventServiceProvider`:
 
 ```php
-use NootPro\SubscriptionPlans\Events\SubscriptionCreated;
+use HamzaMughales\SubscriptionPlans\Events\SubscriptionCreated;
 
 protected $listen = [
     SubscriptionCreated::class => [
@@ -183,7 +183,7 @@ $subscription->changePlan($newPlan);
 ### Query Subscriptions
 
 ```php
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\SubscriptionPlans\Models\PlanSubscription;
 
 // Get active subscription
 $subscription = $company->activePlanSubscription();
@@ -210,7 +210,7 @@ The package includes a comprehensive invoice management system for tracking subs
 Add the `Invoiceable` trait to your subscriber model to access invoice-related methods:
 
 ```php
-use NootPro\SubscriptionPlans\Traits\Invoiceable;
+use HamzaMughales\SubscriptionPlans\Traits\Invoiceable;
 
 class Company extends Model
 {
@@ -223,7 +223,7 @@ class Company extends Model
 Create an invoice for a subscription using the `InvoiceService`:
 
 ```php
-use NootPro\SubscriptionPlans\Services\InvoiceService;
+use HamzaMughales\SubscriptionPlans\Services\InvoiceService;
 
 $invoiceService = app(InvoiceService::class);
 
@@ -253,8 +253,8 @@ $invoiceService->addItem(
 Record payment transactions for an invoice:
 
 ```php
-use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
-use NootPro\SubscriptionPlans\Enums\PaymentMethodType;
+use HamzaMughales\SubscriptionPlans\Enums\InvoiceTransactionStatus;
+use HamzaMughales\SubscriptionPlans\Enums\PaymentMethodType;
 
 // Record payment with payment method type
 $transaction = $invoiceService->recordPayment(
@@ -290,8 +290,8 @@ $remaining = $invoiceService->getRemainingBalance($invoice);
 ### Query Invoices
 
 ```php
-use NootPro\SubscriptionPlans\Models\Invoice;
-use NootPro\SubscriptionPlans\Enums\InvoiceStatus;
+use HamzaMughales\SubscriptionPlans\Models\Invoice;
+use HamzaMughales\SubscriptionPlans\Enums\InvoiceStatus;
 
 // Get all invoices for a subscriber
 $invoices = $company->subscriptionInvoices;
@@ -374,8 +374,8 @@ $invoiceNumber = $invoice->invoice_number; // Format: INV-202501-000001
 The package supports payment method management with translatable names and type-based categorization:
 
 ```php
-use NootPro\SubscriptionPlans\Models\PaymentMethod;
-use NootPro\SubscriptionPlans\Enums\PaymentMethodType;
+use HamzaMughales\SubscriptionPlans\Models\PaymentMethod;
+use HamzaMughales\SubscriptionPlans\Enums\PaymentMethodType;
 
 // Create a payment method
 $paymentMethod = PaymentMethod::create([
@@ -487,7 +487,7 @@ This package follows Laravel and PHP best practices:
 Any model can be a subscriber by using the trait:
 
 ```php
-use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
+use HamzaMughales\SubscriptionPlans\Traits\HasPlanSubscriptions;
 
 class Team extends Model
 {
@@ -531,8 +531,8 @@ The `ModulesGate` trait provides automatic authorization for Filament resources 
 Add the trait to your Filament resource or page:
 
 ```php
-use NootPro\SubscriptionPlans\Traits\ModulesGate;
-use NootPro\SubscriptionPlans\Enums\Modules;
+use HamzaMughales\SubscriptionPlans\Traits\ModulesGate;
+use HamzaMughales\SubscriptionPlans\Enums\Modules;
 use Filament\Resources\Resource;
 
 class WebsiteResource extends Resource
@@ -615,7 +615,7 @@ The package includes a built-in middleware `EnsureSubscriptionValid` to protect 
 
 ```php
 // Register in bootstrap/app.php (Laravel 11+)
-use NootPro\SubscriptionPlans\Http\Middleware\EnsureSubscriptionValid;
+use HamzaMughales\SubscriptionPlans\Http\Middleware\EnsureSubscriptionValid;
 
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->alias([
@@ -674,7 +674,7 @@ vendor/bin/pest --coverage --min=80
 
 ## Security
 
-If you discover any security issues, please email support@noot-web.com instead of using the issue tracker.
+If you discover any security issues, please email hamzawemughales@gmail.com instead of using the issue tracker.
 
 ## Documentation
 
@@ -702,8 +702,8 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 
 ## Support
 
-- 📧 Email: support@noot-web.com
-- 🐛 Issues: [GitHub Issues](https://github.com/noot-web/subscription-plans/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/noot-web/subscription-plans/discussions)
-- 📖 Documentation: [Full Documentation](https://docs.noot-web.com)
+- 📧 Email: hamzawemughales@gmail.com
+- 🐛 Issues: [GitHub Issues](https://github.com/hamza-mughales/laravel-subscriptions/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/hamza-mughales/laravel-subscriptions/discussions)
+- 📖 Documentation: [GitHub Repository](https://github.com/Hamza-Mughales/subscription-plans)
 

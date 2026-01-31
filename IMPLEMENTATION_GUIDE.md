@@ -8,7 +8,7 @@ A step-by-step guide to implement this package in your Laravel projects.
 
 ### Install via Composer
 ```bash
-composer require noot-web/subscription-plans
+composer require hamza-mughales/laravel-subscriptions
 ```
 
 ### Publish Assets
@@ -38,8 +38,8 @@ Any model can be a subscriber (User, Company, Team, etc.):
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use NootPro\SubscriptionPlans\Contracts\SubscriberInterface;
-use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
+use HamzaMughales\SubscriptionPlans\Contracts\SubscriberInterface;
+use HamzaMughales\SubscriptionPlans\Traits\HasPlanSubscriptions;
 
 class Company extends Model implements SubscriberInterface
 {
@@ -67,8 +67,8 @@ php artisan make:seeder PlansSeeder
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Enums\{Features, Interval, PlanType, SubscriptionModel};
+use HamzaMughales\SubscriptionPlans\Models\Plan;
+use HamzaMughales\SubscriptionPlans\Enums\{Features, Interval, PlanType, SubscriptionModel};
 
 class PlansSeeder extends Seeder
 {
@@ -184,7 +184,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
-use NootPro\SubscriptionPlans\Models\Plan;
+use HamzaMughales\SubscriptionPlans\Models\Plan;
 
 class SubscriptionController extends Controller
 {
@@ -231,7 +231,7 @@ class SubscriptionController extends Controller
 ### Recording Feature Usage
 
 ```php
-use NootPro\SubscriptionPlans\Enums\Features;
+use HamzaMughales\SubscriptionPlans\Enums\Features;
 
 // Get active subscription
 $subscription = $company->activePlanSubscription();
@@ -433,7 +433,7 @@ php artisan make:listener SendSubscriptionNotification
 
 namespace App\Listeners;
 
-use NootPro\SubscriptionPlans\Events\SubscriptionCreated;
+use HamzaMughales\SubscriptionPlans\Events\SubscriptionCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Notifications\SubscriptionStarted;
 
@@ -459,7 +459,7 @@ class SendSubscriptionNotification implements ShouldQueue
 ### Register in EventServiceProvider
 
 ```php
-use NootPro\SubscriptionPlans\Events\{
+use HamzaMughales\SubscriptionPlans\Events\{
     SubscriptionCreated,
     SubscriptionUpdated,
     SubscriptionDeleted,
@@ -493,7 +493,7 @@ The package includes a built-in middleware `EnsureSubscriptionValid` that you ca
 ```php
 // app/Http/Kernel.php (Laravel 11+)
 // bootstrap/app.php (Laravel 11+)
-use NootPro\SubscriptionPlans\Http\Middleware\EnsureSubscriptionValid;
+use HamzaMughales\SubscriptionPlans\Http\Middleware\EnsureSubscriptionValid;
 
 // In bootstrap/app.php
 ->middleware([
@@ -593,7 +593,7 @@ protected function schedule(Schedule $schedule): void
 {
     // Check for expired trials
     $schedule->call(function () {
-        \NootPro\SubscriptionPlans\Models\PlanSubscription::findEndedTrial()
+        \HamzaMughales\SubscriptionPlans\Models\PlanSubscription::findEndedTrial()
             ->get()
             ->each(function ($subscription) {
                 // Handle expired trial
@@ -605,7 +605,7 @@ protected function schedule(Schedule $schedule): void
     
     // Check for expiring subscriptions
     $schedule->call(function () {
-        \NootPro\SubscriptionPlans\Models\PlanSubscription::findEndingPeriod(7)
+        \HamzaMughales\SubscriptionPlans\Models\PlanSubscription::findEndingPeriod(7)
             ->get()
             ->each(function ($subscription) {
                 // Notify about expiring subscription
@@ -692,7 +692,7 @@ This package uses PEST for testing. Here's how to write tests for your implement
 <?php
 
 use App\Models\Company;
-use NootPro\SubscriptionPlans\Models\Plan;
+use HamzaMughales\SubscriptionPlans\Models\Plan;
 
 it('can subscribe a company to a plan', function () {
     $company = Company::factory()->create();
@@ -787,7 +787,7 @@ composer test-coverage
 Need help? Check:
 - [README.md](README.md) - Full documentation
 - [IMPROVEMENTS.md](IMPROVEMENTS.md) - Technical details
-- [GitHub Issues](https://github.com/noot-web/subscription-plans/issues)
+- [GitHub Issues](https://github.com/hamza-mughales/laravel-subscriptions/issues)
 
 ---
 
