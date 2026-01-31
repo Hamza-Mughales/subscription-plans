@@ -55,13 +55,13 @@ class EnsureSubscriptionValid
      * Get the subscriber from the request.
      *
      * This method attempts to get the subscriber from:
-     * 1. Filament tenant (if using Filament)
-     * 2. Authenticated user (if using standard auth)
+     * 1. Tenant context (if available, e.g., Filament multi-tenancy)
+     * 2. Authenticated user (standard Laravel auth)
      * 3. Custom resolver from config
      */
     protected function getSubscriber(Request $request): ?object
     {
-        // Try Filament tenant first
+        // Try tenant first (optional - supports multi-tenancy packages like Filament)
         if (class_exists(\Filament\Facades\Filament::class)) {
             $tenant = \Filament\Facades\Filament::getTenant();
             if ($tenant && $this->hasTrait($tenant)) {

@@ -13,7 +13,7 @@ All notable changes to `subscription-plans` will be documented in this file.
 - Event-driven architecture
 - Comprehensive test suite
 - Module-based access control
-- ModulesGate trait for Filament resources/pages authorization
+- Module-based access control system
 - Subscription middleware for route protection
 - Translation files publishable via vendor:publish
 

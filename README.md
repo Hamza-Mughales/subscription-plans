@@ -20,7 +20,6 @@ A comprehensive, flexible, and production-ready subscription and plans managemen
 
 ### Advanced Features
 - ✅ **Subscription Middleware** - Built-in `EnsureSubscriptionValid` middleware to protect routes with subscription validation
-- ✅ **ModulesGate Trait** - Authorization for Filament resources/pages based on active subscription modules
 
 ## Installation
 
@@ -522,92 +521,6 @@ The package includes proration fields for handling mid-period plan changes:
 - `prorate_period` - Proration period
 - `prorate_extend_due` - Extend due date after proration
 
-### Module-Based Access Control with ModulesGate
-
-The `ModulesGate` trait provides automatic authorization for Filament resources and pages based on active subscription modules. It checks if the current tenant/company has the required modules enabled before allowing access.
-
-#### Basic Usage
-
-Add the trait to your Filament resource or page:
-
-```php
-use HamzaMughales\SubscriptionPlans\Traits\ModulesGate;
-use HamzaMughales\SubscriptionPlans\Enums\Modules;
-use Filament\Resources\Resource;
-
-class WebsiteResource extends Resource
-{
-    use ModulesGate;
-
-    /**
-     * Define which modules are required for this resource.
-     * Can be a single module string or an array of modules.
-     */
-    protected static function getModuleNames(): array|string
-    {
-        return Modules::WebsiteContent->value;
-    }
-}
-```
-
-#### Multiple Modules
-
-You can require multiple modules (access granted if any module is active):
-
-```php
-protected static function getModuleNames(): array|string
-{
-    return [
-        Modules::WebsiteContent->value,
-        Modules::Blog->value,
-    ];
-}
-```
-
-#### Custom Tenant Model
-
-If your tenant model is different from the default, override the method:
-
-```php
-protected static function getTenantModelClass(): ?string
-{
-    return \App\Models\Organization::class;
-}
-```
-
-#### Available Authorization Methods
-
-The trait automatically provides these Filament authorization methods:
-
-- `shouldRegisterNavigation()` - Controls navigation visibility
-- `canViewAny()` - Controls list view access
-- `canAccess()` - Controls page/resource access
-- `canCreate()` - Controls create access
-- `canUpdate()` - Controls update access
-- `canDelete()` - Controls delete access
-- `canDeleteAny()` - Controls bulk delete access
-- `canRestore()` - Controls restore access
-- `canForceDelete()` - Controls force delete access
-- `canView()` - Controls individual record view access
-
-All methods check if any of the required modules are active for the current tenant.
-
-#### How It Works
-
-1. The trait gets the current tenant from Filament context or user relationships
-2. It checks if the tenant has any of the required modules enabled via `SubscriptionPlans::moduleEnabled()`
-3. Module status is cached for performance
-4. If no modules are active, access is denied
-
-#### Configuration
-
-Make sure your `config/subscription-plans.php` has the tenant model configured:
-
-```php
-'tenant_model' => \App\Models\Company::class,
-```
-
-Or the trait will attempt to auto-detect common tenant model names.
 
 ### Subscription Middleware
 
