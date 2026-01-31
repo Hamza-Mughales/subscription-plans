@@ -55,17 +55,17 @@ class EnsureSubscriptionValid
      * Get the subscriber from the request.
      *
      * This method attempts to get the subscriber from:
-     * 1. Tenant context (if available, e.g., Filament multi-tenancy)
+     * 1. Custom resolver from config
      * 2. Authenticated user (standard Laravel auth)
-     * 3. Custom resolver from config
      */
     protected function getSubscriber(Request $request): ?object
     {
-        // Try tenant first (optional - supports multi-tenancy packages like Filament)
-        if (class_exists(\Filament\Facades\Filament::class)) {
-            $tenant = \Filament\Facades\Filament::getTenant();
-            if ($tenant && $this->hasTrait($tenant)) {
-                return $tenant;
+        // Try custom resolver first
+        $resolver = config('subscription-plans.subscriber_resolver');
+        if ($resolver && is_callable($resolver)) {
+            $subscriber = $resolver($request);
+            if ($subscriber && $this->hasTrait($subscriber)) {
+                return $subscriber;
             }
         }
 
@@ -73,15 +73,6 @@ class EnsureSubscriptionValid
         $user = $request->user();
         if ($user && $this->hasTrait($user)) {
             return $user;
-        }
-
-        // Try custom resolver from config
-        $resolver = config('subscription-plans.subscriber_resolver');
-        if ($resolver && is_callable($resolver)) {
-            $subscriber = $resolver($request);
-            if ($subscriber && $this->hasTrait($subscriber)) {
-                return $subscriber;
-            }
         }
 
         return null;
@@ -139,13 +130,6 @@ class EnsureSubscriptionValid
             return response()->json([
                 'message' => __('subscription-plans::subscription-plans.no_active_subscription'),
             ], 403);
-        }
-
-        if (class_exists(\Filament\Facades\Filament::class)) {
-            $panel = \Filament\Facades\Filament::getPanel('subscription');
-            if ($panel) {
-                return redirect()->to((string) $panel->getUrl());
-            }
         }
 
         return redirect()->route($redirectTo ?? config('subscription-plans.middleware.redirect_route', 'subscription.plans'));
