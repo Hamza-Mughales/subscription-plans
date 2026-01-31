@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Observers;
+namespace HamzaMughales\Subscriptions\Observers;
 
-use NootPro\SubscriptionPlans\Events\ModuleCreated;
-use NootPro\SubscriptionPlans\Events\ModuleDeleted;
-use NootPro\SubscriptionPlans\Events\ModuleRestored;
-use NootPro\SubscriptionPlans\Events\ModuleUpdated;
-use NootPro\SubscriptionPlans\Models\PlanModule;
+use HamzaMughales\Subscriptions\Events\ModuleCreated;
+use HamzaMughales\Subscriptions\Events\ModuleDeleted;
+use HamzaMughales\Subscriptions\Events\ModuleRestored;
+use HamzaMughales\Subscriptions\Events\ModuleUpdated;
+use HamzaMughales\Subscriptions\Models\PlanModule;
 
 /**
  * PlanModuleObserver

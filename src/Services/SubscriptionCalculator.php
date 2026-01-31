@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Services;
+namespace HamzaMughales\Subscriptions\Services;
 
 use Carbon\Carbon;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Models\Plan;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 class SubscriptionCalculator
 {

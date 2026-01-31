@@ -1,19 +1,19 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Providers;
+namespace HamzaMughales\Subscriptions\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use NootPro\SubscriptionPlans\Events\ModuleCreated;
-use NootPro\SubscriptionPlans\Events\ModuleDeleted;
-use NootPro\SubscriptionPlans\Events\ModuleRestored;
-use NootPro\SubscriptionPlans\Events\ModuleUpdated;
-use NootPro\SubscriptionPlans\Events\SubscriptionCreated;
-use NootPro\SubscriptionPlans\Events\SubscriptionDeleted;
-use NootPro\SubscriptionPlans\Events\SubscriptionRestored;
-use NootPro\SubscriptionPlans\Events\SubscriptionUpdated;
-use NootPro\SubscriptionPlans\Listeners\ClearSubscriptionCache;
-use NootPro\SubscriptionPlans\Listeners\RefreshSubscriberModuleCacheOnModuleEvents;
-use NootPro\SubscriptionPlans\Listeners\RefreshSubscriberModuleCacheOnSubscriptionEvents;
+use HamzaMughales\Subscriptions\Events\ModuleCreated;
+use HamzaMughales\Subscriptions\Events\ModuleDeleted;
+use HamzaMughales\Subscriptions\Events\ModuleRestored;
+use HamzaMughales\Subscriptions\Events\ModuleUpdated;
+use HamzaMughales\Subscriptions\Events\SubscriptionCreated;
+use HamzaMughales\Subscriptions\Events\SubscriptionDeleted;
+use HamzaMughales\Subscriptions\Events\SubscriptionRestored;
+use HamzaMughales\Subscriptions\Events\SubscriptionUpdated;
+use HamzaMughales\Subscriptions\Listeners\ClearSubscriptionCache;
+use HamzaMughales\Subscriptions\Listeners\RefreshSubscriberModuleCacheOnModuleEvents;
+use HamzaMughales\Subscriptions\Listeners\RefreshSubscriberModuleCacheOnSubscriptionEvents;
 
 class EventServiceProvider extends ServiceProvider
 {

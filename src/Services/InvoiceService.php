@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Services;
+namespace HamzaMughales\Subscriptions\Services;
 
-use NootPro\SubscriptionPlans\Enums\InvoiceStatus;
-use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
-use NootPro\SubscriptionPlans\Models\Invoice;
-use NootPro\SubscriptionPlans\Models\InvoiceItem;
-use NootPro\SubscriptionPlans\Models\InvoiceTransaction;
+use HamzaMughales\Subscriptions\Enums\InvoiceStatus;
+use HamzaMughales\Subscriptions\Enums\InvoiceTransactionStatus;
+use HamzaMughales\Subscriptions\Models\Invoice;
+use HamzaMughales\Subscriptions\Models\InvoiceItem;
+use HamzaMughales\Subscriptions\Models\InvoiceTransaction;
 
 class InvoiceService
 {

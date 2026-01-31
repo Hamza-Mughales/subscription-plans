@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Database\Factories;
+namespace HamzaMughales\Subscriptions\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Enums\SubscriptionModel;
+use HamzaMughales\Subscriptions\Models\Plan;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\NootPro\SubscriptionPlans\Models\PlanSubscription>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\HamzaMughales\Subscriptions\Models\PlanSubscription>
  */
 class PlanSubscriptionFactory extends Factory
 {

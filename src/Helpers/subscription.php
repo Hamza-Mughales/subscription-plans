@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use NootPro\SubscriptionPlans\Facades\SubscriptionPlans;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Facades\SubscriptionPlans;
+use HamzaMughales\Subscriptions\Models\Plan;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 if (! function_exists('subscription_plan')) {
     /**

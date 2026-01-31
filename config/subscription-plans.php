@@ -10,16 +10,16 @@ return [
     |
     */
     'models' => [
-        'plan'                      => \NootPro\SubscriptionPlans\Models\Plan::class,
-        'plan_subscription'         => \NootPro\SubscriptionPlans\Models\PlanSubscription::class,
-        'plan_feature'              => \NootPro\SubscriptionPlans\Models\PlanFeature::class,
-        'plan_subscription_usage'   => \NootPro\SubscriptionPlans\Models\PlanSubscriptionUsage::class,
-        'plan_subscription_feature' => \NootPro\SubscriptionPlans\Models\PlanSubscriptionFeature::class,
-        'plan_module'               => \NootPro\SubscriptionPlans\Models\PlanModule::class,
-        'invoice'                   => \NootPro\SubscriptionPlans\Models\Invoice::class,
-        'invoice_item'              => \NootPro\SubscriptionPlans\Models\InvoiceItem::class,
-        'invoice_transaction'       => \NootPro\SubscriptionPlans\Models\InvoiceTransaction::class,
-        'payment_method'            => \NootPro\SubscriptionPlans\Models\PaymentMethod::class,
+        'plan'                      => \HamzaMughales\Subscriptions\Models\Plan::class,
+        'plan_subscription'         => \HamzaMughales\Subscriptions\Models\PlanSubscription::class,
+        'plan_feature'              => \HamzaMughales\Subscriptions\Models\PlanFeature::class,
+        'plan_subscription_usage'   => \HamzaMughales\Subscriptions\Models\PlanSubscriptionUsage::class,
+        'plan_subscription_feature' => \HamzaMughales\Subscriptions\Models\PlanSubscriptionFeature::class,
+        'plan_module'               => \HamzaMughales\Subscriptions\Models\PlanModule::class,
+        'invoice'                   => \HamzaMughales\Subscriptions\Models\Invoice::class,
+        'invoice_item'              => \HamzaMughales\Subscriptions\Models\InvoiceItem::class,
+        'invoice_transaction'       => \HamzaMughales\Subscriptions\Models\InvoiceTransaction::class,
+        'payment_method'            => \HamzaMughales\Subscriptions\Models\PaymentMethod::class,
     ],
 
     /*
@@ -44,11 +44,11 @@ return [
     |
     */
     'enums' => [
-        'interval'           => \NootPro\SubscriptionPlans\Enums\Interval::class,
-        'plan_type'          => \NootPro\SubscriptionPlans\Enums\PlanType::class,
-        'subscription_model' => \NootPro\SubscriptionPlans\Enums\SubscriptionModel::class,
-        'features'           => \NootPro\SubscriptionPlans\Enums\Features::class,
-        'modules'            => \NootPro\SubscriptionPlans\Enums\Modules::class,
+        'interval'           => \HamzaMughales\Subscriptions\Enums\Interval::class,
+        'plan_type'          => \HamzaMughales\Subscriptions\Enums\PlanType::class,
+        'subscription_model' => \HamzaMughales\Subscriptions\Enums\SubscriptionModel::class,
+        'features'           => \HamzaMughales\Subscriptions\Enums\Features::class,
+        'modules'            => \HamzaMughales\Subscriptions\Enums\Modules::class,
     ],
 
     /*
@@ -126,7 +126,7 @@ return [
     'listeners' => [
         'enabled'    => env('SUBSCRIPTION_LISTENERS_ENABLED', true),
         'additional' => [
-            // \NootPro\SubscriptionPlans\Events\SubscriptionCreated::class => [
+            // \HamzaMughales\Subscriptions\Events\SubscriptionCreated::class => [
             //     \App\Listeners\YourCustomListener::class,
             // ],
         ],

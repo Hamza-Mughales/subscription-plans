@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use NootPro\SubscriptionPlans\Enums\Interval;
-use NootPro\SubscriptionPlans\Enums\PlanType;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Models\Plan;
+use HamzaMughales\Subscriptions\Enums\Interval;
+use HamzaMughales\Subscriptions\Enums\PlanType;
+use HamzaMughales\Subscriptions\Enums\SubscriptionModel;
+use HamzaMughales\Subscriptions\Models\Plan;
 
 it('can create a plan', function () {
     $plan = Plan::create([

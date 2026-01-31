@@ -1,6 +1,6 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Listeners;
+namespace HamzaMughales\Subscriptions\Listeners;
 
 class RefreshSubscriberModuleCacheOnSubscriptionEvents
 {
@@ -31,15 +31,15 @@ class RefreshSubscriberModuleCacheOnSubscriptionEvents
         // when the transaction has definitely committed and database changes are visible
         if ($eventClass === 'SubscriptionCreated' || $eventClass === 'SubscriptionRestored' || $eventClass === 'SubscriptionUpdated') {
             // Clear both subscription and module caches
-            \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::clearSubscriptionCache($subscriber);
-            \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::clearModuleCache($subscriber);
+            \HamzaMughales\Subscriptions\Facades\SubscriptionPlans::clearSubscriptionCache($subscriber);
+            \HamzaMughales\Subscriptions\Facades\SubscriptionPlans::clearModuleCache($subscriber);
 
             return;
         }
 
         if ($eventClass === 'SubscriptionDeleted') {
-            \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::clearModuleCache($subscriber);
-            \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::clearSubscriptionCache($subscriber);
+            \HamzaMughales\Subscriptions\Facades\SubscriptionPlans::clearModuleCache($subscriber);
+            \HamzaMughales\Subscriptions\Facades\SubscriptionPlans::clearSubscriptionCache($subscriber);
 
             return;
         }

@@ -1,9 +1,9 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Events;
+namespace HamzaMughales\Subscriptions\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 class SubscriptionRestored
 {

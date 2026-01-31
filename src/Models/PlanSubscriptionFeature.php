@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

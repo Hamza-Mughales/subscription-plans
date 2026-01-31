@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Services;
+namespace HamzaMughales\Subscriptions\Services;
 
 use Carbon\Carbon;
 use InvalidArgumentException;

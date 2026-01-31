@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Http\Middleware;
+namespace HamzaMughales\Subscriptions\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
+use HamzaMughales\Subscriptions\Traits\HasPlanSubscriptions;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * Usage:
  * - In routes: Route::middleware(['auth', 'subscription'])->group(...)
- * - In Kernel: 'subscription' => \NootPro\SubscriptionPlans\Http\Middleware\EnsureSubscriptionValid::class
+ * - In Kernel: 'subscription' => \HamzaMughales\Subscriptions\Http\Middleware\EnsureSubscriptionValid::class
  */
 class EnsureSubscriptionValid
 {

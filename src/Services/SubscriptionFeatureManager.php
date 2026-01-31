@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Services;
+namespace HamzaMughales\Subscriptions\Services;
 
 use Illuminate\Database\Eloquent\Model;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
-use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Traits\HasPlanSubscriptions;
 
 /**
  * Service class for managing subscription feature usage and limits.

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use NootPro\SubscriptionPlans\Database\Factories\PaymentMethodFactory;
-use NootPro\SubscriptionPlans\Enums\PaymentMethodType;
+use HamzaMughales\Subscriptions\Database\Factories\PaymentMethodFactory;
+use HamzaMughales\Subscriptions\Enums\PaymentMethodType;
 use Spatie\Translatable\HasTranslations;
 
 /**

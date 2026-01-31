@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Tests;
+namespace HamzaMughales\Subscriptions\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use NootPro\SubscriptionPlans\Providers\SubscriptionPlansServiceProvider;
+use HamzaMughales\Subscriptions\Providers\SubscriptionPlansServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -15,7 +15,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'NootPro\\SubscriptionPlans\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'HamzaMughales\\Subscriptions\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

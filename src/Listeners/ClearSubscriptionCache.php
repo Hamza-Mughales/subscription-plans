@@ -1,8 +1,8 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Listeners;
+namespace HamzaMughales\Subscriptions\Listeners;
 
-use NootPro\SubscriptionPlans\Facades\SubscriptionPlans;
+use HamzaMughales\Subscriptions\Facades\SubscriptionPlans;
 
 class ClearSubscriptionCache
 {

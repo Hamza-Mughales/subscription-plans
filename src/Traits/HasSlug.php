@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Traits;
+namespace HamzaMughales\Subscriptions\Traits;
 
 use Spatie\Sluggable\HasSlug as BaseHasSlug;
 use Spatie\Sluggable\SlugOptions;

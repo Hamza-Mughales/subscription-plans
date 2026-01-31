@@ -1,12 +1,12 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Observers;
+namespace HamzaMughales\Subscriptions\Observers;
 
-use NootPro\SubscriptionPlans\Events\SubscriptionCreated;
-use NootPro\SubscriptionPlans\Events\SubscriptionDeleted;
-use NootPro\SubscriptionPlans\Events\SubscriptionRestored;
-use NootPro\SubscriptionPlans\Events\SubscriptionUpdated;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Events\SubscriptionCreated;
+use HamzaMughales\Subscriptions\Events\SubscriptionDeleted;
+use HamzaMughales\Subscriptions\Events\SubscriptionRestored;
+use HamzaMughales\Subscriptions\Events\SubscriptionUpdated;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 /**
  * PlanSubscriptionObserver

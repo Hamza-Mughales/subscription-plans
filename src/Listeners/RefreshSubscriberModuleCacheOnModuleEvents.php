@@ -1,6 +1,6 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Listeners;
+namespace HamzaMughales\Subscriptions\Listeners;
 
 class RefreshSubscriberModuleCacheOnModuleEvents
 {
@@ -26,7 +26,7 @@ class RefreshSubscriberModuleCacheOnModuleEvents
             ->each(function ($subscription) {
                 $subscriber = $subscription->subscriber;
                 if ($subscriber) {
-                    \NootPro\SubscriptionPlans\Facades\SubscriptionPlans::refreshModuleCache($subscriber);
+                    \HamzaMughales\Subscriptions\Facades\SubscriptionPlans::refreshModuleCache($subscriber);
                 }
             });
     }

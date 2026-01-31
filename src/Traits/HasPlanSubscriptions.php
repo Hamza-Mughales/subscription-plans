@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Traits;
+namespace HamzaMughales\Subscriptions\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
-use NootPro\SubscriptionPlans\Services\Period;
+use HamzaMughales\Subscriptions\Models\Plan;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Services\Period;
 
 trait HasPlanSubscriptions
 {

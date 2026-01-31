@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Facades;
+namespace HamzaMughales\Subscriptions\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method static \NootPro\SubscriptionPlans\Models\Plan|null findPlan(string|int $identifier)
- * @method static \Illuminate\Database\Eloquent\Collection<int, \NootPro\SubscriptionPlans\Models\Plan> getActivePlans()
- * @method static \Illuminate\Database\Eloquent\Collection<int, \NootPro\SubscriptionPlans\Models\Plan> getVisiblePlans()
+ * @method static \HamzaMughales\Subscriptions\Models\Plan|null findPlan(string|int $identifier)
+ * @method static \Illuminate\Database\Eloquent\Collection<int, \HamzaMughales\Subscriptions\Models\Plan> getActivePlans()
+ * @method static \Illuminate\Database\Eloquent\Collection<int, \HamzaMughales\Subscriptions\Models\Plan> getVisiblePlans()
  * @method static bool hasActiveSubscription(object $subscriber)
- * @method static \NootPro\SubscriptionPlans\Models\PlanSubscription|null getActiveSubscription(object $subscriber)
+ * @method static \HamzaMughales\Subscriptions\Models\PlanSubscription|null getActiveSubscription(object $subscriber)
  * @method static void clearSubscriptionCache(object $subscriber)
  * @method static bool moduleEnabled(object $subscriber, string $module)
  * @method static void clearModuleCache(object $subscriber)
  * @method static void refreshModuleCache(object $subscriber)
  *
- * @see \NootPro\SubscriptionPlans\Services\SubscriptionPlansService
+ * @see \HamzaMughales\Subscriptions\Services\SubscriptionPlansService
  */
 class SubscriptionPlans extends Facade
 {

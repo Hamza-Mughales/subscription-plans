@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
+use HamzaMughales\Subscriptions\Enums\InvoiceTransactionStatus;
 
 /**
  * InvoiceTransaction.
@@ -20,8 +20,8 @@ use NootPro\SubscriptionPlans\Enums\InvoiceTransactionStatus;
  * @property string|null $notes
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \NootPro\SubscriptionPlans\Models\Invoice $invoice
- * @property-read \NootPro\SubscriptionPlans\Models\PaymentMethod|null $paymentMethod
+ * @property-read \HamzaMughales\Subscriptions\Models\Invoice $invoice
+ * @property-read \HamzaMughales\Subscriptions\Models\PaymentMethod|null $paymentMethod
  */
 class InvoiceTransaction extends Model
 {

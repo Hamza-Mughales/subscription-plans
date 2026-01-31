@@ -1,5 +1,5 @@
 {
-    "name": "noot-pro/subscription-plans",
+    "name": "hamza-mughales/laravel-subscriptions",
     "description": "A comprehensive subscription and plans management system for Laravel",
     "type": "library",
     "keywords": [
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NootPro\\SubscriptionPlans\\": "src/"
+            "HamzaMughales\\Subscriptions\\": "src/"
         },
         "files": [
             "src/Helpers/subscription.php"
@@ -43,14 +43,14 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "NootPro\\SubscriptionPlans\\Tests\\": "tests/"
+            "HamzaMughales\\Subscriptions\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "NootPro\\SubscriptionPlans\\Providers\\SubscriptionPlansServiceProvider",
-                "NootPro\\SubscriptionPlans\\Providers\\EventServiceProvider"
+                "HamzaMughales\\Subscriptions\\Providers\\SubscriptionPlansServiceProvider",
+                "HamzaMughales\\Subscriptions\\Providers\\EventServiceProvider"
             ]
         }
     },

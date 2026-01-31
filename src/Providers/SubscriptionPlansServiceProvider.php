@@ -1,11 +1,11 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Providers;
+namespace HamzaMughales\Subscriptions\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
-use NootPro\SubscriptionPlans\Observers\PlanSubscriptionObserver;
-use NootPro\SubscriptionPlans\Services\SubscriptionPlansService;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Observers\PlanSubscriptionObserver;
+use HamzaMughales\Subscriptions\Services\SubscriptionPlansService;
 
 class SubscriptionPlansServiceProvider extends ServiceProvider
 {

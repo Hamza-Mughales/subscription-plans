@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Traits;
+namespace HamzaMughales\Subscriptions\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use NootPro\SubscriptionPlans\Models\Plan;
+use HamzaMughales\Subscriptions\Models\Plan;
 
 trait BelongsToPlan
 {

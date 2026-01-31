@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Traits;
+namespace HamzaMughales\Subscriptions\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 /**
  * Trait for tracking subscription feature usage.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Events;
+namespace HamzaMughales\Subscriptions\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
-use NootPro\SubscriptionPlans\Models\PlanModule;
+use HamzaMughales\Subscriptions\Models\PlanModule;
 
 class ModuleUpdated
 {

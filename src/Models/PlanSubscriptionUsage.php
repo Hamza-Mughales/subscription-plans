@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -86,7 +86,7 @@ class PlanSubscriptionUsage extends Model
      */
     public function scopeByFeatureCode(Builder $builder, string $featureCode, int $planId): Builder
     {
-        $feature = \NootPro\SubscriptionPlans\Models\PlanFeature::where('plan_id', $planId)->where('code', $featureCode)->firstOrFail();
+        $feature = \HamzaMughales\Subscriptions\Models\PlanFeature::where('plan_id', $planId)->where('code', $featureCode)->firstOrFail();
 
         return $builder->where('feature_id', $feature->getKey());
     }

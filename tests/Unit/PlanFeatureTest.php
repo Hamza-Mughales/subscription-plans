@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use NootPro\SubscriptionPlans\Enums\Features;
-use NootPro\SubscriptionPlans\Enums\Interval;
-use NootPro\SubscriptionPlans\Enums\PlanType;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanFeature;
+use HamzaMughales\Subscriptions\Enums\Features;
+use HamzaMughales\Subscriptions\Enums\Interval;
+use HamzaMughales\Subscriptions\Enums\PlanType;
+use HamzaMughales\Subscriptions\Enums\SubscriptionModel;
+use HamzaMughales\Subscriptions\Models\Plan;
+use HamzaMughales\Subscriptions\Models\PlanFeature;
 
 beforeEach(function () {
     $this->plan = Plan::create([

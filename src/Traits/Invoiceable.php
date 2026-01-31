@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Traits;
+namespace HamzaMughales\Subscriptions\Traits;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use NootPro\SubscriptionPlans\Models\Invoice;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Models\Invoice;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
 
 trait Invoiceable
 {

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Carbon\Carbon;
-use NootPro\SubscriptionPlans\Services\Period;
+use HamzaMughales\Subscriptions\Services\Period;
 
 it('can create a period with default values', function () {
     $period = new Period;

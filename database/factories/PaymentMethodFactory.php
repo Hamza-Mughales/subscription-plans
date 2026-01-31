@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Database\Factories;
+namespace HamzaMughales\Subscriptions\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use NootPro\SubscriptionPlans\Enums\PaymentMethodType;
-use NootPro\SubscriptionPlans\Models\PaymentMethod;
+use HamzaMughales\Subscriptions\Enums\PaymentMethodType;
+use HamzaMughales\Subscriptions\Models\PaymentMethod;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\NootPro\SubscriptionPlans\Models\PaymentMethod>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\HamzaMughales\Subscriptions\Models\PaymentMethod>
  */
 class PaymentMethodFactory extends Factory
 {

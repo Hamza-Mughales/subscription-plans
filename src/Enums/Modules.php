@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Enums;
+namespace HamzaMughales\Subscriptions\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 

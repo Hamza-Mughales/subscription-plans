@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Traits;
+namespace HamzaMughales\Subscriptions\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use NootPro\SubscriptionPlans\Enums\Modules;
-use NootPro\SubscriptionPlans\Facades\SubscriptionPlans;
+use HamzaMughales\Subscriptions\Enums\Modules;
+use HamzaMughales\Subscriptions\Facades\SubscriptionPlans;
 
 /**
  * ModulesGate Trait

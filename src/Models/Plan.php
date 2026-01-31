@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use NootPro\SubscriptionPlans\Database\Factories\PlanFactory;
-use NootPro\SubscriptionPlans\Enums\Interval;
-use NootPro\SubscriptionPlans\Enums\PlanType;
-use NootPro\SubscriptionPlans\Enums\SubscriptionModel;
-use NootPro\SubscriptionPlans\Traits\HasSlug;
+use HamzaMughales\Subscriptions\Database\Factories\PlanFactory;
+use HamzaMughales\Subscriptions\Enums\Interval;
+use HamzaMughales\Subscriptions\Enums\PlanType;
+use HamzaMughales\Subscriptions\Enums\SubscriptionModel;
+use HamzaMughales\Subscriptions\Traits\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Enums;
+namespace HamzaMughales\Subscriptions\Enums;
 
 enum InvoiceTransactionStatus: string
 {

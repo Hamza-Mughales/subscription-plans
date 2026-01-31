@@ -1,12 +1,12 @@
 <?php
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use NootPro\SubscriptionPlans\Observers\PlanModuleObserver;
+use HamzaMughales\Subscriptions\Observers\PlanModuleObserver;
 
 #[ObservedBy(PlanModuleObserver::class)]
 class PlanModule extends Model

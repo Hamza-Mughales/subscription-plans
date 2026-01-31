@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use NootPro\SubscriptionPlans\Tests\TestCase;
+use HamzaMughales\Subscriptions\Tests\TestCase;
 
 /*
 |--------------------------------------------------------------------------

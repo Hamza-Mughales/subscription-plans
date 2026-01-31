@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Models;
+namespace HamzaMughales\Subscriptions\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use NootPro\SubscriptionPlans\Enums\InvoiceStatus;
+use HamzaMughales\Subscriptions\Enums\InvoiceStatus;
 
 /**
  * Invoice.

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace NootPro\SubscriptionPlans\Services;
+namespace HamzaMughales\Subscriptions\Services;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
-use NootPro\SubscriptionPlans\Models\Plan;
-use NootPro\SubscriptionPlans\Models\PlanSubscription;
-use NootPro\SubscriptionPlans\Traits\HasPlanSubscriptions;
+use HamzaMughales\Subscriptions\Models\Plan;
+use HamzaMughales\Subscriptions\Models\PlanSubscription;
+use HamzaMughales\Subscriptions\Traits\HasPlanSubscriptions;
 
 /**
  * Service class for subscription plans operations.
