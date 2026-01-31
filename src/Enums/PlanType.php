@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace HamzaMughales\Subscriptions\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 
-enum PlanType: string implements HasLabel
+enum PlanType: string
 {
     case Plan     = 'plan';
     case TestPlan = 'test_plan';
 
     /**
      * Get the display label for the plan type.
-     * Compatible with Filament's HasLabel interface.
+     * Get the display label.
      */
     public function getLabel(): string
     {

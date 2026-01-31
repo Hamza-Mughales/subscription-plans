@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace HamzaMughales\Subscriptions\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 
-enum PaymentMethodType: string implements HasLabel
+enum PaymentMethodType: string
 {
     case BankTransfer  = 'bank_transfer';
     case OnlinePayment = 'online_payment';
@@ -24,7 +23,7 @@ enum PaymentMethodType: string implements HasLabel
 
     /**
      * Get the display label for the payment method type.
-     * Compatible with Filament's HasLabel interface.
+     * Get the display label.
      */
     public function getLabel(): string
     {

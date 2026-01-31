@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace HamzaMughales\Subscriptions\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 
-enum Interval: string implements HasLabel
+enum Interval: string
 {
     case Hour  = 'hour';
     case Day   = 'day';
@@ -16,7 +15,7 @@ enum Interval: string implements HasLabel
 
     /**
      * Get the display label for the interval.
-     * Compatible with Filament's HasLabel interface.
+     * Get the display label.
      */
     public function getLabel(): string
     {

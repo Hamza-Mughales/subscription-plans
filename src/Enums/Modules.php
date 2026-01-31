@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace HamzaMughales\Subscriptions\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 
 /**
  * Modules Enum
@@ -29,7 +28,7 @@ use Filament\Support\Contracts\HasLabel;
  *     // Add your project-specific modules here
  * }
  */
-enum Modules: string implements HasLabel
+enum Modules: string
 {
     /**
      * Example module cases - customize these for your project.
@@ -40,7 +39,7 @@ enum Modules: string implements HasLabel
 
     /**
      * Get the display label for the module.
-     * Compatible with Filament's HasLabel interface.
+     * Get the display label.
      */
     public function getLabel(): string
     {

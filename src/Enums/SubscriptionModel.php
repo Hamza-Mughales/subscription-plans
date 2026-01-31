@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace HamzaMughales\Subscriptions\Enums;
 
-use Filament\Support\Contracts\HasLabel;
 
-enum SubscriptionModel: string implements HasLabel
+enum SubscriptionModel: string
 {
     case Payg  = 'payg';
     case Fixed = 'fixed';
 
     /**
      * Get the display label for the subscription model.
-     * Compatible with Filament's HasLabel interface.
+     * Get the display label.
      */
     public function getLabel(): string
     {

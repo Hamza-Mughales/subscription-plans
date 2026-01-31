@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace HamzaMughales\Subscriptions\Enums;
 
-use Filament\Support\Contracts\HasLabel;
-
-enum Features: string implements HasLabel
+enum Features: string
 {
     case Users = 'users';
 
     /**
      * Get the display label for the feature.
-     * Compatible with Filament's HasLabel interface.
      */
     public function getLabel(): string
     {
